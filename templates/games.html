@@ -1,0 +1,755 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+<style>
+    section {
+        display: flex;
+        flex-direction: row;
+        /* margin-top: 1.5%; */
+    }
+
+    /* body {
+        background-color: #ecf8ff;
+    } */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    #imp {
+        background-color: #ecf8ff !important;
+    }
+
+    #good {
+        border: none !important;
+        border-color: #ecf8ff !important;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 1170px;
+        margin: auto;
+    }
+
+    h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    h3 {
+        text-align: left;
+    }
+
+    h4 {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #3e0d0d70;
+    }
+
+    .flip-main {
+        min-height: 100vh;
+        /* background-color: #ecf8ff; */
+        padding: 100px 0;
+        margin: auto;
+    }
+
+    .flip-card {
+        flex: 0 0 calc(25% - 30px);
+        margin: 15px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        box-shadow: 0 0 10px #a9b3d6;
+        position: relative;
+        transition: all 1s ease;
+        width: 350px;
+        height: 250px;
+        transform-style: preserve-3d;
+        transform: perspective(1000px) rotateX(0deg);
+    }
+
+    .flip-card-front img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: #dde3f7;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .flip-title {
+        background-color: red;
+        padding: 30;
+
+        color: #6dd5fa;
+    }
+
+    .flip-card-back {
+        background-image: linear-gradient(#e6e2e2, #6dd5fa);
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 15px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transform: rotateX(180deg);
+        color: #ffffff;
+    }
+
+    .flip-card-back h3 {
+        font-size: 16px;
+        color: #333;
+        margin: 0 0 5px;
+    }
+
+    .flip-card-back p {
+        font-size: 14px;
+        color: #333;
+        margin: 0;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: perspective(1000px) rotateX(180deg);
+    }
+
+    /* Image Head */
+    .image-container {
+        width: 100%;
+        max-width: 600px;
+        margin:auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .image-container img {
+        width: 75%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+        .image-container {
+            max-width: 100%;
+        }
+    }
+
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+        .image-container {
+            max-width: 100%;
+        }
+    }
+
+    .text {
+        font-size: 2rem;
+        font-weight: 100%;
+        color: #cc2b5e;
+        font-family: Poppins;
+    }
+
+    /* Make the font size responsive */
+    @media screen and (max-width: 768px) {
+        .text {
+            font-size: 1.5rem;
+        }
+    }
+
+    .subheading {
+        font-size: 2.3rem;
+        text-align: center;
+        color: #fff;
+        margin-top: 1rem;
+        padding: 1.5vh;
+        background-color: #CC2B5E;
+        width: 100%;
+        max-width: 1111px;
+        padding-left: 10px;
+        border-left-width: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Media Query for smaller screens */
+    @media screen and (max-width: 768px) {
+        .subheading {
+            font-size: 1.5rem;
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        .subheading {
+            width: 90%;
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .flip-card {
+            flex: 0 0 calc(33.33% - 30px);
+        }
+    }
+
+    @media (max-width: 767px) {
+        .flip-card {
+            flex: 0 0 calc(50% - 30px);
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="flip-main">
+    <div class="image-container">
+        <img src="{{url_for('static',filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" alt="">
+    </div>
+    <br>
+    <h2 class="subheading">GAMES & SUBGAMES</h2></br>
+    <div class="container">
+        <div class="row">
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/cricket.webp);
+                    background-size: cover;
+                  ">
+                        <h1>CRICKET</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Season Ball T 20 Cricket Men’s</h3>
+                            <h3>2. Tennis Ball Cricket Men’s</h3>
+                            <h3>3. Tennis Ball Cricket Women (Box)</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/volleyball.webp);
+                    background-size: cover;
+                  ">
+                        <h1>VOLLEY BALL</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Volleyball Men’s</h3>
+                            <h3>2. Volleyball Women’s</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/basketball.webp);
+                    background-size: cover;
+                  ">
+                        <h1>BASKET BALL</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Basketball Men’s: <br />Men’s team 9 members</h3>
+                            <h3>2. Basketball Women’s: <br />Women’s team 9 members</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Tug\ of\ war.webp);
+                    background-size: cover;
+                  ">
+                        <h1>TUG OF WAR</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Tug of war Men’s</h3>
+                            <h3>2. Tug of war Women’s</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/football.webp);
+                    background-size: cover;
+                  ">
+                        <h1>FOOT BALL</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. 11 A Team Men</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/marathon.webp);
+                    background-size: cover;
+                  ">
+                        <h1>MARATHON</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s 10 km</h3>
+                            <h3>2. Women’s 10 km</h3>
+                            <h3>3. Men’s 21 km</h3>
+                            <h3>4. Women’s 21 km</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/walkathon.webp);
+                    background-size: cover;
+                  ">
+                        <h1>WALKATHON</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s 10 km</h3>
+                            <h3>2. Women’s 10 km</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/cyclothon.webp);
+                    background-size: cover;
+                  ">
+                        <h1>CYCLOTHON</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s 20 km</h3>
+                            <h3>2. Women’s 20 km</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Athletics.webp);
+                    background-size: cover;
+                  ">
+                        <h1>ATHLETICS</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Sprint: <br />100 m 200 m 400 m 800 m</h3>
+                            <h3>2. Pole Vault: <br />100 m-Hurdles, 4 x 100 m Relay</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Badminton.webp);
+                    background-size: cover;
+                  ">
+                        <h1>BADMINTON</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Singles</h3>
+                            <h3>2. Men’s Doubles</h3>
+                            <h3>3. Women’s Single</h3>
+                            <h3>4. Women’s Doubles</h3>
+                            <h3>5. Mixed Doubles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Table\ Tennis.webp);
+                    background-size: cover;
+                  ">
+                        <h1>TABLE TENNIS</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Singles</h3>
+                            <h3>2. Men’s Doubles</h3>
+                            <h3>3. Women’s Single</h3>
+                            <h3>4. Women’s Doubles</h3>
+                            <h3>5. Mixed Doubles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/lawntennis.webp);
+                    background-size: cover;
+                  ">
+                        <h1>LAWN TENNIS</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Singles</h3>
+                            <h3>2. Men’s Doubles</h3>
+                            <h3>3. Women’s Single</h3>
+                            <h3>4. Women’s Doubles</h3>
+                            <h3>5. Mixed Doubles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/kabaddi.webp);
+                    background-size: cover;
+                  ">
+                        <h1>KABADDI</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s team 10 members</h3>
+                            <h3>2. Women’s team 10 members</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/kho\ kho.webp);
+                    background-size: cover;
+                  ">
+                        <h1>KHO KHO</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Women’s team 12 members</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/rowing.webp);
+                    background-size: cover;
+                  ">
+                        <h1>ROWING</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s singles</h3>
+                            <h3>2. Women singles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Fencing.webp);
+                    background-size: cover;
+                  ">
+                        <h1>FENCING</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s singles</h3>
+                            <h3>2. Women singles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/swimming.webp);
+                    background-size: cover;
+                  ">
+                        <h1>SWIMMING</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>
+                                1. Butterfly Stroke: <br />
+                                50 m 100 m 200 m
+                            </h3>
+                            <h3>
+                                2. Breaststroke: <br />
+                                50 m 100 m 200 m
+                            </h3>
+                            <h3>
+                                3. Backstroke: <br />
+                                50 m 100 m 200 m
+                            </h3>
+                            <h3>
+                                4. Freestyle: <br />
+                                50 m 100 m 200 m
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Jump.webp);
+                    background-size: cover;
+                  ">
+                        <h1>JUMPS</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Long Jump</h3>
+                            <h3>2. High Jump</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/throw1.webp);
+                    background-size: cover;
+                  ">
+                        <h1>THROW</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Discus Throw</h3>
+                            <h3>2. Javelin Throw</h3>
+                            <h3>3. Shot Put Throw</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/archery.webp);
+                    background-size: cover;
+                  ">
+                        <h1>ARCHERY</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s singles</h3>
+                            <h3>2. Women’s singles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/Shooting.webp);
+                    background-size: cover;
+                  ">
+                        <h1>SHOOTING</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Air rifle singles</h3>
+                            <h3>2. Women’s Air rifle singles</h3>
+                            <h3>3. Men’s Air pistol singles</h3>
+                            <h3>4. Women’s Air pistol singles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/carrom.webp);
+                    background-size: cover;
+                  ">
+                        <h1>CARROM</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Singles</h3>
+                            <h3>2. Men’s Doubles</h3>
+                            <h3>3. Women’s Single</h3>
+                            <h3>4. Women’s Doubles</h3>
+                            <h3>5. Mixed Doubles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/chess.webp);
+                    background-size: cover;
+                  ">
+                        <h1>CHESS</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s</h3>
+                            <h3>2. Women’s</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+            <!-- flip card start -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="overlay"></div>
+                    <div class="flip-card-front" style="
+                    background-image: url(../static/images/rollerskating.webp);
+                    background-size: cover;
+                  ">
+                        <h1>ROLLER SKATING</h1>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="text">
+                            <h3>1. Men’s Singles</h3>
+                            <h3>2. Women’s Single</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- flip card end -->
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+
+
+{% endblock %}

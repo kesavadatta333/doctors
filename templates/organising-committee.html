@@ -1,0 +1,408 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+    <style>
+        
+    
+        .our-team {
+            padding: 20px 15px 30px;
+            margin-bottom: 5%;
+            border-radius: 15px;
+            text-align: center;
+            min-height: 30vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        .our-team .pic {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 25px;
+            transition: all 0.5s ease 0s;
+        }
+    
+        .heading {
+            text-align: center;
+            margin: 3% 0%;
+            color: #23527c;
+        }
+    
+        .our-team:hover .pic {
+            color: #17bebb;
+            border-radius: 50%;
+        }
+    
+        .pic i {
+            font-size: 5rem;
+            border-radius: 50%;
+            color: #707070;
+        }
+    
+        .our-team .title {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e282a;
+            text-transform: uppercase;
+            margin: 0 0 7px 0;
+        }
+    
+        .our-team .post {
+            display: block;
+            font-size: 15px;
+            color: #333;
+            text-transform: capitalize;
+            margin-bottom: 15px;
+        }
+    
+        .our-team .social {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+    
+        .our-team .social li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+    
+        .our-team .social li a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #17bebb;
+            border: 1px solid #17bebb;
+            transition: all 0.5s ease 0s;
+        }
+    
+        .our-team:hover .social li a {
+            background: #17bebb;
+            color: #fff;
+        }
+        .sec1 img {
+                margin-top: 5%;
+                width:40%
+            }
+    
+        @media only screen and (max-width: 990px) {
+            .our-team {
+                margin-bottom: 30px;
+            }
+        }
+    
+        @media screen and (max-width: 768px) {
+            .sec1 img {
+                width: 70%;
+            }
+    
+            .heading {
+                font-size: 1.2rem;
+                color: #23527c;
+                font-weight: bold;
+            }
+        }
+    
+        .organising {
+            padding: 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 19px;
+        }
+    
+        .div1 {
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.4);
+            padding: 3% 4%;
+            margin-right: 3%;
+            line-height: 3;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="gamesSection">
+    <section class="sec1" style="text-align: center">
+        <img src="{{url_for('static',filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" width="25%" />
+    </section>
+    <section class="main">
+        <h2 class="heading">ORGANISING COMMITTEE</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffecc7">
+                        <div style="background-color: #ffecc7" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Ramprasad V</h3>
+                        <span class="post">Patron</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffd6ca">
+                        <div style="background-color: #ffd6ca" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr K Pattabhi Ramiah</h3>
+                        <span class="post">Organising President</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #e4f8ff">
+                        <div style="background-color: #e4f8ff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Karthik Tummala</h3>
+                        <span class="post">Organising Secretary</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #e2ffdb">
+                        <div style="background-color: #e2ffdb" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Pramod Ch</h3>
+                        <span class="post">Vice President I</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffdff1">
+                        <div style="background-color: #ffdff1" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Suresh Kumar V</h3>
+                        <span class="post">Vice President II</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #e5e1ff">
+                        <div style="background-color: #e5e1ff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr MV Subba Rao</h3>
+                        <span class="post">Organising Treasurer</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffe4e4">
+                        <div style="background-color: #ffe4e4" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Dheeraj K</h3>
+                        <span class="post">Joint Secretary - I</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #eadbff">
+                        <div style="background-color: #eadbff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr Anuroop T</h3>
+                        <span class="post">Joint Secretary - II</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="main">
+        <h2 class="heading">ORGANISING EXECUTIVE BODY</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffecc7">
+                        <div style="background-color: #ffecc7" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR. Y.KALYAN CHAKRAVARTHY</h3>
+                        <span class="post">VICE PRESIDENT, IMA AP STATE</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #eadbff">
+                        <div style="background-color: #eadbff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR. O. MANORANJAN REDDY</h3>
+                        <span class="post">VICE PRESIDENT, IMA AP STATE</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #dffdff">
+                        <div style="background-color: #dffdff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR. A. V. SUBBA REDDY</h3>
+                        <span class="post">JOINT SECRETARIES OF IMA AP STATE</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #dffdff">
+                        <div style="background-color: #dffdff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR.M.S. SARMA</h3>
+                        <span class="post">JOINT SECRETARIES OF IMA AP STATE </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #f7ffe1">
+                        <div style="background-color: #f7ffe1" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">Dr. A.VIJAY BHASKAR REDDY</h3>
+                        <span class="post">JOINT SECRETARIES OF IMA AP STATE</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #ffe4e4">
+                        <div style="background-color: #ffe4e4" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR. S.VASUDHA</h3>
+                        <span class="post">WDW STATE SECRETARIES </span><br /><br />
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="our-team" style="background-color: #eadbff">
+                        <div style="background-color: #eadbff" class="pic">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3 class="title">DR. U. SOWJANYA</h3>
+                        <span class="post">MPH STATE SECRETARIES</span>
+                        <br /><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section>
+        <h2 class="heading">ORGANISING EXECUTIVE BODY</h2>
+        <div class="organising">
+            <div style="background-color: #e4f8ff" class="div1">
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr S Ramakrishna</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Rakesh B</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Sivaram A</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Santosh K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Sai Pavan A</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Bujjibabu K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Venkat V</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Kaushik S</span>
+                </div>
+            </div>
+            <div style="background-color: #e2ffdb" class="div1"> 
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr. Y. Bhavan Chand</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Suneel B</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Erwin Sonylal P</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Madhu K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Anil K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Kiran G</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Nageswararao B</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Manoj kumar P</span>
+                </div>
+            </div>
+            <div style="background-color: #ffdff1" class="div1">
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Madhu Murari</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Kiran M</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Keerthi Ch</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Ravikant K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Akshara T</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Mallika B</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Saritha K</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Dr Lata K</span>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</section>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

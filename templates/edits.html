@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+
+{% block style %}
+
+<style>
+    .gamesSection {
+        width: 90%;
+        margin: 100px auto;
+    }
+
+    .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 80px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gameCard {
+        width: 250px;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        border: 1px solid rgb(209, 209, 209);
+    }
+
+    .gameCard .text {
+        font-weight: 600;
+        font-family: monospace;
+        font-size: 15px;
+        text-align: left;
+        margin: 20px 0px;
+    }
+
+    .option {
+        background-color: bisque;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+    .gameCard img {
+        width: 100%;
+        height: 170px;
+    }
+
+    .addNewGames {
+        margin-top: 180px;
+    }
+
+
+
+
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .seth {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .seth {
+        height: 40px;
+    }
+
+    input[type="file"] {
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    /* Adjust the size of the profile picture */
+    .ui-w-50 {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Make the profile section and buttons inline */
+    .media {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Add some spacing between the buttons */
+    .media-body .btn {
+        margin-right: 5px;
+    }
+
+    /* Center align the profile section */
+    .sent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 10vpx;
+        /* Set the container height as needed */
+    }
+
+    .media {
+
+        align-items: center;
+    }
+
+
+
+    .media-body .btn {
+        margin-right: 5px;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include "dashboard-head.html" %}
+
+<section class="gamesSection">
+    <div class="container sent">
+        <div class="media align-items-center py-3 mb-3">
+            <img src="{{url_for('static',filename='uploads/photos/'+filename)}}" alt=""
+                class="d-block ui-w-50 rounded-circle">
+            <div class="media-body ml-4"><br>
+                <br>
+                <br>
+                <h4 class="font-weight-bold mb-0">{{data[1]}} {{data[2]}}</h4>
+                <div class="text-muted mb-2">ID: {{data[0]}}</div>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Profile</a>&nbsp;
+
+                <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST">
+
+        <label>First Name</label>
+        <input class="seth" type="text" name="fname" value="{{data[1]}}" required>
+        <label>Last Name</label>
+        <input class="seth" type="text" name="lname" value="{{data[2]}}" required>
+        <label>Email</label>
+        <input class="seth" type="email" name="email" value="{{data[3]}}" readonly>
+        <label>Mobile Number</label>
+        <input class="seth" type="tel" name="mobile" value="{{data[4]}}" pattern="[0-9()#&amp;+*-=.]+"
+            title="Only numbers and phone characters (#, -, *, etc) are accepted." readonly>
+        <label>Age</label>
+        <input class="seth" type="number" name="age" min="" max="" value="{{data[5]}}" readonly>
+        <label>Gender</label>
+        <select class="seth" name="gender">
+            <option value="{{data[6]}}">{{data[6]}}</option>
+            
+        </select>
+        <label>Date Of Birth</label>
+        <input class="seth" type="date" name="dob" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="{{data[7]}}" readonly>
+        <label>City</label>
+        <input class="seth" type="text" name="city" value="{{data[8]}}">
+        <label>Address</label>
+        <input class="seth" type="text" name="address" value="{{data[9]}}">
+        <label>State</label>
+        <select class="seth" name="state">
+            <option value="Arunachal Pradesh" {% if data[10]=='Arunachal Pradesh' %}selected{% endif %}>Arunachal
+                Pradesh</option>
+            <option value="Assam" {% if data[10]=='Assam' %}selected{% endif %}>Assam</option>
+            <option value="Bihar" {% if data[10]=='Bihar' %}selected{% endif %}>Bihar</option>
+            <option value="Chhattisgarh" {% if data[10]=='Chhattisgarh' %}selected{% endif %}>Chhattisgarh</option>
+            <option value="Goa" {% if data[10]=='Goa' %}selected{% endif %}>Goa</option>
+            <option value="Gujarat" {% if data[10]=='Gujarat' %}selected{% endif %}>Gujarat</option>
+            <option value="Haryana" {% if data[10]=='Haryana' %}selected{% endif %}>Haryana</option>
+            <option value="Himachal Pradesh" {% if data[10]=='Himachal Pradesh' %}selected{% endif %}>Himachal Pradesh
+            </option>
+            <option value="Jammu and Kashmir" {% if data[10]=='Jammu and Kashmir' %}selected{% endif %}>Jammu and
+                Kashmir</option>
+            <option value="Jharkhand" {% if data[10]=='Jharkhand' %}selected{% endif %}>Jharkhand</option>
+            <option value="Karnataka" {% if data[10]=='Karnataka' %}selected{% endif %}>Karnataka</option>
+            <option value="Kerala" {% if data[10]=='Kerala' %}selected{% endif %}>Kerala</option>
+            <option value="Madhya Pradesh" {% if data[10]=='Madhya Pradesh' %}selected{% endif %}>Madhya Pradesh
+            </option>
+            <option value="Maharashtra" {% if data[10]=='Maharashtra' %}selected{% endif %}>Maharashtra</option>
+            <option value="Manipur" {% if data[10]=='Manipur' %}selected{% endif %}>Manipur</option>
+            <option value="Meghalaya" {% if data[10]=='Meghalaya' %}selected{% endif %}>Meghalaya</option>
+            <option value="Mizoram" {% if data[10]=='Mizoram' %}selected{% endif %}>Mizoram</option>
+            <option value="Nagaland" {% if data[10]=='Nagaland' %}selected{% endif %}>Nagaland</option>
+            <option value="Odisha" {% if data[10]=='Odisha' %}selected{% endif %}>Odisha</option>
+            <option value="Punjab" {% if data[10]=='Punjab' %}selected{% endif %}>Punjab</option>
+            <option value="Rajasthan" {% if data[10]=='Rajasthan' %}selected{% endif %}>Rajasthan</option>
+            <option value="Sikkim" {% if data[10]=='Sikkim' %}selected{% endif %}>Sikkim</option>
+            <option value="Tamil Nadu" {% if data[10]=='Tamil Nadu' %}selected{% endif %}>Tamil Nadu</option>
+            <option value="Telangana" {% if data[10]=='Telangana' %}selected{% endif %}>Telangana</option>
+            <option value="Tripura" {% if data[10]=='Tripura' %}selected{% endif %}>Tripura</option>
+            <option value="Uttar Pradesh" {% if data[10]=='Uttar Pradesh' %}selected{% endif %}>Uttar Pradesh</option>
+            <option value="Uttarakhand" {% if data[10]=='Uttarakhand' %}selected{% endif %}>Uttarakhand</option>
+            <option value="West Bengal" {% if data[10]=='West Bengal' %}selected{% endif %}>West Bengal</option>
+            <option value="Andhra Pradesh" {% if data[10]=='Andhra Pradesh' %}selected{% endif %}>Andhra Pradesh
+            </option>
+
+        </select>
+        <label>Country</label>
+        <select class="seth" name="country">
+
+            <option value="{{data[12]}}" selected>{{data[11]}}</option>
+            <!-- Options for countries here -->
+        </select>
+        <label>Degree-MBBS(Compulsory)</label>
+        <select class="seth" name="degree">
+            <option>{{data[12]}}</option>
+
+
+
+        </select>
+        <label>State or MCI Registration No</label>
+        <input class="seth" type="text" name="mci" value="{{data[13]}}" required>
+        <label>Select Member</label>
+        <select class="seth" name="selectmember" aria-required="true" readonly>
+            <option>{{data[14]}}</option>
+
+        </select>
+        <label>Select Shirt Size</label>
+        <select class="seth" name="shirtsize" value="{{data[15]}}" required>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+            <option value="XXXXL">XXXXL</option>
+            <option value="{{data[15]}}" selected>{{data[15]}}</option>
+
+        </select>
+        <label>Food Preference</label>
+        <select class="seth" name="food_preference" value="{{data[16]}}" required>
+            <option disabled>Select Preference</option>
+            <option selected>{{data[16]}}</option>
+            {% if data[16] == "Veg" %}
+            <option value="Non-Veg">Non-Veg</option>
+            {% else %}
+            <option value="Veg">Veg</option>
+            {% endif %}
+        </select>
+        {% if data[14] == "IMA Member" %}
+        <label>IMA Registration No:</label>
+        <input class="seth" id="ima_reg_no" type="text" name="ima_reg_no" value="{{data[17]}}" required>
+        {% else %}
+        <input class="seth" type="text" name="ima_reg_no" id="ima_reg_no" value="{{data[17]}}" hidden>
+        {% endif %}
+        <!--<label>Upload IMA or MBBS certificate</label>
+            <input type="file" name="certificate" data-maxsize="5" data-maxsize-message="This file exceeds the maximum allowed size.">
+            <label>Upload Photo</label>
+            <input type="file" name="photo" data-maxsize="5" data-maxsize-message="This file exceeds the maximum allowed size.">-->
+        <button>submit</button>
+    </form>
+    </body>
+</section>
+
+{% endblock %}
+
+
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileInput = document.getElementById('ima_reg_no');
+
+        mobileInput.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+        });
+    });
+
+</script>
+
+
+{% endblock %}

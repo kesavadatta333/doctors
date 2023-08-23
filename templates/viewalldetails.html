@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details</title>
+<style>
+    /* Add any additional CSS styles here if needed */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgba(206, 238, 255, 0.8);
+        padding: 20px;
+    }
+
+    .payment-table {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .payment-table table {
+        border-collapse: collapse;
+        /* Add this line to control table borders */
+        width: 100%;
+        /* Added width to ensure table takes full width */
+    }
+
+    .payment-table th {
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #007bff;
+        border: 1px solid #ccc;
+
+        /* Color applied to table headers */
+        color: #ffffff;
+        /* Text color for table headers */
+    }
+
+    .payment-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        /* Add this line to apply borders to cells */
+        /* text-align: center; */
+        vertical-align: middle;
+    }
+
+    .payment-table b {
+        font-weight: bold;
+    }
+    .view-button {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+    {% include 'admin-head.html' %}
+    <div id="content"> 
+        <div class="container">
+            <h2><b></b>Person Registration Details</b></h2>
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="payment-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>{{rdetails[0]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>{{rdetails[1]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td>{{rdetails[2]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{rdetails[3]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile No</td>
+                                    <td>{{rdetails[5]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Age</td>
+                                    <td>{{rdetails[6]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>{{rdetails[7]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>DOB</td>
+                                    <td>{{rdetails[8]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>{{rdetails[9]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>{{rdetails[10]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>{{rdetails[11]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>{{rdetails[12]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Degree</td>
+                                    <td>{{rdetails[13]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>MCL Id</td>
+                                    <td>{{rdetails[14]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Member</td>
+                                    <td>{{rdetails[15]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shirt Size</td>
+                                    <td>{{rdetails[16]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Acceptance</td>
+                                    <td>{{rdetails[17]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{rdetails[18]}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Photo</td>
+                                    <td><a href="{{ url_for('static', filename='uploads/photos/' + filename) }}" class="view-button">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Certificate</td>
+                                    <td><a href="{{ url_for('static', filename='uploads/certificates/' + filenames) }}" class="view-button">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+       </div>
+   </div>
+   </div>
+</body>
+</html>
+
+
+
+
+
+<!--DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .cart {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+       
+        .cart-item {
+            margin-bottom: 20px;
+        }
+       
+        p {
+            margin: 5px 0;
+        }
+       
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+       <h4>Person Registration Details</h4>
+       <div class="cart">
+           {% for rdetails in rdetails %}
+           <div class="cart-item">
+               <p><strong>Id:</strong> {{rdetails[0]}}</p>
+               <p><strong>First Name:</strong> {{rdetails[1]}}</p>
+               <p><strong>Last Name:</strong> {{rdetails[2]}}</p>
+               <p><strong>Email:</strong> {{rdetails[3]}}</p>
+               <p><strong>Mobile No:</strong> {{rdetails[5]}}</p>
+               <p><strong>Age:</strong> {{rdetails[6]}}</p>
+               <p><strong>Gender:</strong> {{rdetails[7]}}</p>
+               <p><strong>DOB:</strong> {{rdetails[8]}}</p>
+               <p><strong>City:</strong> {{rdetails[9]}}</p>
+               <p><strong>Address:</strong> {{rdetails[10]}}</p>
+               <p><strong>State:</strong> {{rdetails[11]}}</p>
+               <p><strong>Country:</strong> {{rdetails[12]}}</p>
+               <p><strong>Degree:</strong> {{rdetails[13]}}</p>
+               <p><strong>MCL_Id:</strong> {{rdetails[14]}}</p>
+               <p><strong>Member:</strong> {{rdetails[15]}}</p>
+               <p><strong>Shirt Size:</strong> {{rdetails[16]}}</p>
+               <p><strong>Acceptance:</strong> {{rdetails[17]}}</p>
+               <p><strong>Status:</strong> {{rdetails[18]}}</p>
+           </div>
+           {% endfor %}
+       </div>
+   </div>
+</body>
+</html-->

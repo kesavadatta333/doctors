@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block style %}
+    
+
+    <style>
+      /* ===== Google Font Import - Poppins ===== */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+      .image-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-container img {
+        width: 75%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+      }
+
+      @media (max-width: 768px) {
+        .image-container {
+          max-width: 100%;
+        }
+      }
+
+      /* Media query for responsiveness */
+      @media (max-width: 768px) {
+        .image-container {
+          max-width: 100%;
+        }
+      }
+    </style>
+  {% endblock %}
+  {% block content %}
+    <section class="gamesSection">
+      <div class="image-container">
+        <img src="{{url_for('static',filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" alt="" />
+      </div>
+
+      <div class="Rules1>">
+        <h2 style="color: red">MISSION STATEMENT</h2>
+        <p class="long-text">
+          The Mission is to Aid in Academic, Emotional, Physical Cooperation and
+          Coordination of Doctors through Promotion of Team Work &
+          sportsmanship.
+        </p>
+        <h3 style="color: #323595">GOALS of our sports Olympiad</h3>
+        <p class="long-text">
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i>
+          &nbsp;&nbsp;To develop sport skills among doctors by maximizing
+          participation and focusing on a Healthy life.
+        </p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp;To develop the positive values of athletics, including
+          sportsmanship, teamwork, cooperation, and competition.
+        </p>
+        <p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp; To foster academic and athletic achievement in doctors
+          by emphasizing the importance of self-discipline, sacrifice, and
+          dedication to achieving goals.
+        </p>
+        <p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp;To enhance emotional control, dependability, and respect
+          for rules, property, and authority in doctors.
+        </p>
+        <p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp;To provide doctors the opportunity to work as a member of
+          a team to achieve a goal, and in the process, learn the importance of
+          cooperation, teamwork, and good sportsmanship.
+        </p>
+        <p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp;To provide doctors with experiences that require
+          problem-solving, decision-making, and critical thinking skills.
+        </p>
+        <p>
+          <i class="fa-solid fa-circle-stop" style="color: #005cfa"></i
+          >&nbsp;&nbsp;To promote the opportunity to pursue physical fitness as
+          a means of mental well-being in doctors.
+        </p>
+      </div>
+    </section>
+    {% endblock %}
+      {% block script %}
+      {% endblock %}

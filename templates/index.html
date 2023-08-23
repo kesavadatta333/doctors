@@ -1,0 +1,1014 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+
+
+<style>
+  /* *{
+    border:1px solid red !important;
+  } */
+.large_nav {
+  display: flex;
+  justify-content: space-between;
+}
+.bar {
+  border: 0.5px solid black;
+  background-color: black;
+  height: 20px;
+  margin: auto 0px;
+}
+.navbar_menus {
+  padding-left: 40px;
+}
+.navbar_menus ul li {
+  margin-left: 20px;
+  color: rgb(37, 37, 37);
+  font-weight: 500;
+}
+/* .nav-item:hover{
+    border-bottom: 2px solid blue;
+    cursor: pointer;
+    transition: 0.1s;
+} */
+
+.nav-item {
+  position: relative; /* Adding position to create the hover effect */
+}
+
+.nav-item:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Height of the hover effect line */
+  background-color: blue; /* Change the background color to your desired effect color */
+  cursor: pointer;
+}
+
+.nav-item:hover::before {
+  opacity: 1; /* On hover, set the opacity to 1 to show the animation */
+  animation: fadeIn 0.5s ease-in; /* Add the animation effect */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.navToggleBtn {
+  border: none;
+  background-color: white;
+  display: none;
+}
+.navToggleBtn i {
+  outline: none;
+  font-size: 26px;
+}
+@keyframes scaleAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(
+      1.1
+    ); /* You can adjust the scale factor as per your preference */
+  }
+}
+
+.registerBtn {
+  display: inline-block;
+  padding: 5px 20px;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background-color: blue;
+  color: white;
+  border-radius: 2px;
+}
+
+
+.registerBtn {
+  animation: scaleAnimation 2s infinite;
+}
+
+.bgcontain1 {
+  background-image: linear-gradient(#3c9cff, #1c62ff);
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bgcontain1 div {
+  flex-basis: 45%;
+  padding: 10px;
+}
+
+.callback {
+  background-color: transparent;
+  color: white;
+  border: solid 2px white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.callback:hover {
+  background-color: white;
+  color: #1c62ff;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+  justify-content: center;
+  align-items: center;
+}
+.gameCard {
+  width: 250px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  border: 1px solid rgb(209, 209, 209);
+}
+.gameCard .text {
+  font-weight: 600;
+  font-family: monospace;
+  font-size: 15px;
+  text-align: left;
+  margin: 20px 0px;
+}
+.option {
+  background-color: bisque;
+  color: black;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+.gameCard img {
+  width: 100%;
+  height: 170px;
+}
+.addNewGames {
+  margin-top: 180px;
+}
+
+.quickLinks {
+  margin-top: 20px;
+}
+.list-unstyled > li {
+  color: grey;
+}
+.quickLinks a {
+  text-decoration: none;
+  color: grey;
+}
+
+.quickLinks a:hover {
+  text-decoration: none;
+  color: black;
+}
+@media screen and (max-width: 979px) {
+  .bar {
+    display: none;
+  }
+  .navbar_menus ul {
+    margin: 50px 0px;
+    padding: 0px;
+  }
+  .navbar_menus ul .nav-item {
+    padding: 0px 20px;
+    font-size: 18px;
+  }
+  .navbar_menus ul .nav-item:hover {
+    border: 0px;
+    background-color: black;
+    width: 58%;
+  }
+  .navbar_menus ul .nav-item:hover a {
+    color: white;
+  }
+  .registerBtn {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  .navToggleBtn {
+    display: block;
+  }
+}
+
+.socialLinks {
+  font-weight: bold;
+  color: lightseagreen;
+}
+
+.message {
+  font-size: 30px;
+}
+
+.bi-whatsapp {
+  margin: 10px;
+}
+
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  opacity: 0; /* Start with zero opacity to hide the dropdown */
+  visibility: hidden; /* Hide the dropdown from interactions until shown */
+  transform: translateY(-10px) scaleY(0); /* Offset the dropdown and scale it down */
+  transform-origin: top; /* Set the transformation origin to the top */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; /* Add transition for smooth animation */
+}
+
+.nav-item:hover .dropdown-menu {
+  opacity: 1; /* On hover, set the opacity to 1 to show the dropdown */
+  visibility: visible; /* Make the dropdown visible when shown */
+  transform: translateY(0) scaleY(1); /* Bring the dropdown to its original position and scale it up */
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  list-style: none;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+
+.codegnan {
+  color: white;
+  text-decoration: none;
+}
+
+.main {
+  background-image: url("../static/images/Artboard2.jpg");
+  background-size: cover;
+  min-height: 100vh;
+}
+.our-team {
+  padding: 20px 15px 30px;
+  margin-bottom: 5%;
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
+  min-height: 30vh;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.our-team .pic {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 25px;
+  transition: all 0.5s ease 0s;
+}
+.heading {
+  text-align: center;
+  margin: 3% 0%;
+}
+.our-team:hover .pic {
+  color: #17bebb;
+  border-radius: 50%;
+}
+.pic i {
+  font-size: 5rem;
+  border-radius: 50%;
+}
+.our-team .title {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e282a;
+  text-transform: uppercase;
+  margin: 0 0 7px 0;
+}
+.our-team .post {
+  display: block;
+  font-size: 15px;
+  color: #17bebb;
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+.our-team .social {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.our-team .social li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.our-team .social li a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  font-size: 15px;
+  color: #17bebb;
+  border: 1px solid #17bebb;
+  transition: all 0.5s ease 0s;
+}
+.our-team:hover .social li a {
+  background: #17bebb;
+  color: #fff;
+}
+@media only screen and (max-width: 990px) {
+  .our-team {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sec1 img {
+    width: 70%;
+  }
+  .heading {
+    font-size: 1.2rem;
+  }
+}
+
+.sec1 {
+  background-image: url("../static/images/Artboard2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 110vh;
+}
+.sec1-div1 {
+  display: flex;
+  justify-content: space-around;
+  padding: 4% 0% 0% 13%;
+}
+.left {
+  font-size: 1rem;
+  width: fit-content;
+  color: #323596;
+  font-weight: bolder;
+  margin-top: 8%;
+}
+.left h1{
+  font-weight: bold;
+}
+@media screen and (max-width:768px){
+    .left h1{
+        margin-top: 40% !important;
+        margin-left: 3%;
+    }
+}
+.left h1 {
+  font-family: "Roboto", sans-serif;
+}
+.sec3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 4% ;
+  padding: 0% 0% 5% 13%;
+}
+.sec3 div {
+  width: 40%;
+  margin-top: 5%;
+}
+.sec3 h1 {
+  font-size: 1.5rem;
+  color: #323596;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1%;
+  font-weight: bold !important;
+
+}
+.sec3 p {
+  color: gray;
+  font-size: 1rem;
+}
+.sec3 a {
+  background-color: #323596;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 25px;
+}
+.sec3 img {
+  width: 50%;
+}
+.carousel {
+  width: 640px;
+  height: 360px;
+}
+.carousel-item img {
+  width: 100%;
+}
+.sec3 iframe {
+  margin-top: 10%;
+}
+@media (max-width: 768px) {
+  .sec1-div1 {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sec1-div1 img {
+    width: 100%;
+  }
+  .sec3 {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%!important;
+    padding: 2%;
+  }
+  .sec3 div {
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .sec3 img {
+    width: 100%;
+  }
+  .sec3 iframe {
+    width: 90%;
+    min-height: 70vh;
+  }
+}
+@media (max-width: 768px) {
+  .sec3 iframe {
+    width: 98%;
+    min-height: 50vh;
+  }
+  .bgcontain1 {
+    flex-direction: column;
+  }
+  .bgcontain h1 {
+    font-size: 12px;
+  }
+  .callback {
+    font-size: 10px;
+  }
+}
+
+a.filled-button {
+  background-color: #23527c;
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: normal;
+  padding: 12px 30px;
+  border-radius: 30px;
+  display: inline-block;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+a.filled-button2 {
+  background-color: #23527c;
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 30px;
+  display: inline-block;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+a.filled-button:hover {
+  background-color: #fff;
+  color: #23527c;
+}
+.button {
+  text-align: center;
+}
+
+.title-committee {
+  color: #000;
+}
+
+.section-games {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../static/images/photo-1480099225005-2513c8947aec.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: 30px 0px 30px 0px;
+  /* margin-top: 5%; */
+}
+.section-games h4 {
+  background-color: #fff;
+  color: #000;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+.bgcontain {
+  position: absolute;
+  top: 1;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background-image: linear-gradient(#3c9cff, #1c62ff);
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.container1{
+  display: flex;
+  justify-content: center;
+  background-color: #323596;
+  
+  padding: 1%;
+}
+
+.container1 a{
+  color: white;
+}
+
+.bgcontan {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes pulse{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scaleX(1.1);
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container1 h5{
+    font-size: 0.9rem !important;
+    padding-top: 1%;
+    
+  }
+}
+  
+
+
+
+.head {
+  animation: scaleAnimation 1s infinite;
+}
+
+
+  .carousel-inner img {
+          width: 100%;
+          max-height: 95vh;
+        }
+      .carousel-control-prev-icon {
+        color: black !important;
+      }
+      @media screen and (max-width: 768px) {
+        .carousel-inner img {
+          width: 100%;
+          height: 50vh;
+          /* display: none !important; */
+        }
+      }
+      #carouselExample {
+        width: 98vw;
+        height:auto;
+        margin-top:1%;
+        margin-bottom: 2%;
+        padding: 5% 5% 5% 5%;
+  
+      }
+      .card {
+        width: 35vw;
+      
+        text-align: center;
+        display: flex;
+        margin: auto;
+        margin-top: 1%;
+        justify-content: space-around;
+       background-color: rgb(206,238,255,0.8);
+        box-shadow: 1px 3px 5px  grey !important;
+        margin-top: 3%;
+      
+      
+      }
+      @media screen and (max-width:768px){
+      #carouselExample{
+        height:100vh !important;
+      }
+      .card{
+        width:90vw !important;
+      }
+      .newpara{
+        font-size:15px;
+      }
+      .one{
+        padding:8%;
+      }
+      .two{
+        padding:3%;
+      }
+      .row{
+       margin-left:-5% !important;
+      }
+      }
+     
+      .carousel-inner{
+        display: flex;
+        justify-content: space-between;
+        margin:auto;
+       
+        
+      }
+      .hello{
+       width:60%;
+   
+      }
+      .newpara{
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 3%;
+      
+
+      }
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+       
+        background-color:grey; /* Change this to your desired color */
+        /* You can also customize other styles like size and border-radius */
+      }
+
+      /* Custom styles for carousel arrow color on hover */
+      .carousel-control-prev:hover .carousel-control-prev-icon,
+      .carousel-control-next:hover .carousel-control-next-icon {
+        
+
+        background-color:black; /* Change this to your desired hover color */
+      }
+      .carousel-control-prev{
+        margin-left: -7% !important;
+      }
+      .carousel-control-next{
+        margin-right: -7% !important;
+      }
+
+</style>
+{% endblock %}
+
+
+{% block home %}
+
+<section class="gamesSection">
+    <section class="sec1">
+        <div class="container1">
+          <div>
+            <h5 class="bgcontan">
+             <a href="{{ url_for('register')}}" style="text-decoration: none"> REGISTRATIONS STARTS FROM AUGUST 23RD</a>
+            </h5>
+          </div>
+        </div>
+        <div class="sec1-div1">
+            <div class="left">
+                <h1>Divided By Specialities United By Sports.!</h1>
+                <a href="{{url_for('rules_nav')}}" style="text-decoration: none;">
+                <button style="
+                margin-top: 2%;
+                background-color: #323596;
+                color: white;
+                border: none;
+                padding: 2% 3%;
+                font-weight: bold;
+              " class="sec1-btn">
+                    LEARN MORE
+                </button>
+                </a>
+            </div>
+            <img src="{{url_for('static', filename='images/IMA  LOGO  Page Design.png')}}" width="45%" />
+        </div>
+    </section>
+    <section class="bgcontain1">
+        <div>
+            <h2>CALL BACK RIGHT NOW</h2>
+            <a href="tel:9759434567" style="text-decoration: none;">
+            <button class="callback">CALL US</button>
+            </a>
+        </div>
+        <div>
+            <h2>For More Details</h2>
+            <a href="{{url_for('static', filename='IMA-Brochure.pdf')}}" style="text-decoration: none;">
+            <button class="callback">DOWNLOAD BROUCHER</button>
+            </a>
+        </div>
+    </section>
+    <section class="sec3" style="background-color: white;">
+        <div>
+            <h1>DOCTORS SPORTS OLYMPIAD 2023</h1>
+            <p>
+                The Mission is to Aid in Academic, Emotional, Physical Cooperation
+                and Coordination of Doctors through Promotion of Team Work &
+                sportsmanship.
+            </p>
+            <a href="{{url_for('venue_sports_schedule')}}">READ MORE</a>
+        </div>
+        <img src="{{url_for('static', filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" />
+    </section>
+    <!--carousel-->
+    <section>
+        <div id="carouselExample" class="carousel slide col-12" style="background-image: url(../static/images/Artboard1.jpg); background-position: center;">
+            <div class="carousel-inner" style="padding-bottom: 3%;">
+                <div class="carousel-item active">
+                                <h1 class="text-center">ORGANISED BY INDIAN MEDICAL ASSOCIATIONS</h1>
+                    <div class="row">
+       
+                        <div class="col-12 col-xl-6">
+                            <div class="card one" style="background-color: #ffecc7;">
+                                <h5 class="card-title">Dr Sharad Kr. Agarwal</h5>
+                                <p class="card-text">National IMA President</p>
+                            </div>
+                            <div class="card one" style="background-color:#f0ffca;">
+                                <h5 class="card-title">Dr Anilkumar J. Nayak</h5>
+                                <p class="card-text">Hon. Secretary General</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <div class="card one" style="background-color:#e2ffdb;">
+                                <h5 class="card-title">Dr G. Ravi Krishna</h5>
+                                <p class="card-text">President IMA-AP</p>
+                            </div>
+                            <div class="card one" style="background-color:  #ffd6ca;">
+                                <h5 class="card-title">Dr Phanidhar P </h5>
+                                <p class="card-text">Hon. Secretary, IMA-AP </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <h1 class="text-center">NATIONAL SPORTS COMMITTEE</h1>
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <div class="card two" style="background-color:#eae4ff;">
+                                <h5 class="card-title">Dr. Ketan Desai</h5>
+                                <p class="card-text">CHIEF PATRON</br>
+                                    Past Presicent, WMA, MCI & IMA </p>
+                            </div>
+                            <div class="card two" style="background-color:#ffdff1 ;">
+                                <h5 class="card-title">Dr Sharad Kr. Agarwal </h5>
+                                <p class="card-text">National President</p>
+                            </div>
+                            <div class="card two" style="background-color: #ffecc7;">
+                                <h5 class="card-title">Dr. Sahajanand P d. Singh </h5>
+                                <p class="card-text">Imm. Past National President</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <div class="card two"  style="background-color:#f0ffca;">
+                                <h5 class="card-title">Dr R. V. Asokan</h5>
+                                <p class="card-text">National President Elect</p>
+                            </div>
+                            <div class="card two"  style="background-color:#e2ffdb;">
+                                <h5 class="card-title">Dr Anilkumar J. Nayak</h5>
+                                <p class="card-text">Hon. Secretary General</p>
+                            </div>
+                            <div class="card two"  style="background-color:#fbffe4;">
+                                <h5 class="card-title">Dr Shitij Bali</h5>
+                                <p class="card-text">Hon. Finance Secretary</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                          <h1 class="text-center">NATIONAL SPORTS COMMITTEE</h1>
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <div class="card two" style="background-color: #ffecc7;">
+                                <h5 class="card-title">Dr Sri Hari D</h5>
+                                <p class="card-text">IMA National Vice President</p>
+                            </div>
+                            <div class="card two" style="background-color:#ffdff1 ;">
+                                <h5 class="card-title">Dr G Ravi Krishna</h5>
+                                <p class="card-text">President IMA-AP</p>
+                            </div>
+                            <div class="card two"  style="background-color:#f0ffca;">
+                                <h5 class="card-title">Dr Phanidhar P</h5>
+                                <p class="card-text">Hon. Secretary IMA-AP</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <div class="card two"  style="background-color:#e2ffdb;">
+                                <h5 class="card-title">Dr M Ravindranath</h5>
+                                <p class="card-text">Finance Secretary, IMA AP State</p>
+                            </div>
+                            <div class="card two"  style="background-color:#fbffe4;" >
+                                <h5 class="card-title">Dr M A Rehman</h5>
+                                <p class="card-text">President IMA Vijayawada</p>
+                            </div>
+                            <div class="card two" style="background-color:#eae4ff;" >
+                                <h5 class="card-title">Dr Durga Rani PV</h5>
+                                <p class="card-text">Secretary IMA Vijayawada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                          <h1 class="text-center">ORGANISING COMMITTEE</h1>
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <div class="card" style="background-color:#eae4ff;">
+                                <h5 class="card-title">Dr Ramprasad V </h5>
+                                <p class="card-text">Patron</p>
+                            </div>
+                            <div class="card" style="background-color:#fffee4;">
+                                <h5 class="card-title">Dr K Pattabhi Ramiah</h5>
+                                <p class="card-text">Organising President</p>
+                            </div>
+                            <div class="card" style="background-color:#ffe4fb;">
+                                <h5 class="card-title">Dr Karthik Tummala </h5>
+                                <p class="card-text">Organising Secretary</p>
+                            </div>
+                            <div class="card" style="background-color:#ffe4e7;">
+                                <h5 class="card-title">Dr Pramod Ch</h5>
+                                <p class="card-text">Vice President I</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <div class="card" style="background-color:#eeffe4;">
+                                <h5 class="card-title">Dr Suresh Kumar V</h5>
+                                <p class="card-text">Vice President II</p>
+                            </div>
+                            <div class="card" style="background-color:#ffe9e4;">
+                                <h5 class="card-title">Dr MV Subba Rao </h5>
+                                <p class="card-text">Organising Treasurer</p>
+                            </div>
+                            <div class="card" style="background-color:#e4fff3;">
+                                <h5 class="card-title">Dr Dheeraj K</h5>
+                                <p class="card-text">Joint Secretary - I</p>
+                            </div>
+                            <div class="card" style="background-color:#fffee4;">
+                                <h5 class="card-title">Dr Anuroop T</h5>
+                                <p class="card-text">Joint Secretary - II</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                          <h1 class="text-center">ORGANISING EXECUTIVE BODY</h1>
+                    <div class="row d-flex">
+                        <div class="col-12 col-lg-4 ">
+                            <div class="card hello" style="background-color:#ffe9e4;">
+                                <h5 class="card-text newpara">Dr S Ramakrishna </h5>
+                                <h5 class="card-text newpara">Dr Rakesh B</h5>
+                                <h5 class="card-text newpara">Dr Sivaram A</h5>
+                                <h5 class="card-text newpara">Dr Santosh K </h5>
+                                <h5 class="card-text newpara">Dr Sai Pavan A</h5>
+                                <h5 class="card-text newpara">Dr Bujjibabu K</h5>
+                                <h5 class="card-text newpara">Dr Venkat V</h5>
+                                <h5 class="card-text newpara">Dr Kaushik S</h5>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="card hello" style="background-color:#f1e4ff;">
+                                <h5 class="card-text newpara">Dr. Y. Bhavan Chand</h5>
+                                <h5 class="card-text newpara">Dr Suneel B</h5>
+                                <h5 class="card-text newpara">Dr Erwin Sonylal P</h5>
+                                <h5 class="card-text newpara">Dr Madhu K </h5>
+                                <h5 class="card-text newpara">Dr Anil K</h5>
+                                <h5 class="card-text newpara">Dr Kiran G </h5>
+                                <h5 class="card-text newpara">Dr Nageswararao B</h5>
+                                <h5 class="card-text newpara">Dr Manoj kumar P</h5>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="card hello" style="background-color:#e4ffe6;">
+                                <h5 class="card-text newpara">Dr Madhu Murari </h5>
+                                <h5 class="card-text newpara">Dr Kiran M </h5>
+                                <h5 class="card-text newpara">Dr Keerthi Ch </h5>
+                                <h5 class="card-text newpara">Dr Ravikant K </h5>
+                                <h5 class="card-text newpara">Dr Akshara T</h5>
+                                <h5 class="card-text newpara">Dr Mallika B </h5>
+                                <h5 class="card-text newpara">Dr Saritha K </h5>
+                                <h5 class="card-text newpara">Dr Lata K </h5>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+    </section>
+
+    <section class="sec3" style="background-color: white;">
+        <div>
+            <h1 class="sen">IMA National Sports Meet | DOCTORS OLYMPIAD 2023</h1>
+            <h1>November 22 - 26, 2023 | Andhra Pradesh</h1>
+            <p>
+                Check out this enthralling teaser for the IMA National Sports Meet
+                “DOCTORS OLYMPIAD 2023” ! Get ready for a competition like no other,
+                as medical professionals from all over India come together to show
+                off their athletic prowess and sportsmanship. With 24 games, and
+                Over 80 disciplines including exciting events like athletics,
+                swimming, basketball and more, it promises to be a thrilling
+                competition. Don’t miss out on this one mark your calendars now for
+                the IMA National Sports Meet – Doctors Olympiad 2023! November
+                22-26, 2023 Indian Medical Association Andhra Pradesh.
+            </p>
+            <a href="{{url_for('venue_sports_schedule')}}">READ MORE</a>
+        </div>
+        <iframe width="480" height="250" src="https://www.youtube.com/embed/wq13sUIMWB0"
+            title="IMA National Sports Meet | DOCTORS OLYMPIAD 2023 | November 22-26, 2023 | Andhra Pradesh | Teaser"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+    </section>
+
+    <section class="section-games">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-committee my-5">
+                        <h3 class="text-center" style="margin-bottom: 40px; color: #fff">
+                            GAMES IN IMA NATIONAL SPORTS 2023, VIJAYAWADA - AP
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Cricket</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Volleyball</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Basket Ball</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Foot Ball</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Table Tennis</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Badminton</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="container button">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="{{url_for('games_subgames')}}" class="filled-button2">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+{% endblock %}

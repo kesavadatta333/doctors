@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+
+{% block style %}
+<style>
+	section {
+		display: flex;
+		flex-direction: row;
+	}
+
+	body {
+		background-color: white;
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+	}
+
+	#imp {
+		background-color: #e4f4fd !important;
+	}
+
+	#good {
+		border: none !important;
+		border-color: #e4f4fd !important;
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.container {
+		max-width: 1170px;
+		margin: auto;
+	}
+
+	h1 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: white;
+		font-size: 25px;
+		text-align: center;
+	}
+
+	h3 {
+		text-align: left;
+	}
+
+	/* Image Head */
+	.image-container {
+		width: 100%;
+		max-width: 600px;
+		margin: 20px auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.image-container img {
+		width: 75%;
+		height: auto;
+		max-height: 400px;
+		object-fit: cover;
+	}
+
+	@media (max-width: 768px) {
+		.image-container {
+			max-width: 100%;
+		}
+	}
+
+	/* Media query for responsiveness */
+	@media (max-width: 768px) {
+		.image-container {
+			max-width: 100%;
+		}
+	}
+
+	.text {
+		font-size: 2rem;
+		font-weight: 100%;
+		color: #cc2b5e;
+		font-family: Poppins;
+	}
+
+	/* Make the font size responsive */
+	@media screen and (max-width: 768px) {
+		.text {
+			font-size: 1.5rem;
+		}
+	}
+
+	.subheading {
+		font-size: 2.3rem;
+		text-align: center;
+		color: #fff;
+		margin-top: 1rem;
+		padding: 1.5vh;
+		background-color: #cc2b5e;
+		width: 100%;
+		max-width: 1111px;
+		padding-left: 10px;
+		border-left-width: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Media Query for smaller screens */
+	@media screen and (max-width: 768px) {
+		.subheading {
+			font-size: 1.5rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.subheading {
+			width: 90%;
+		}
+	}
+
+	section {
+		background-color: rgba(225, 242, 251, 0.7);
+	}
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<section class="name d-flex flex-column">
+	<div class="container1">
+		<div class="row">
+			<div class="newy col-8 col-lg-10 " class="imi"
+				style="display:flex ;justify-content: center; margin-bottom: 0%;">
+				<img src="{{url_for('static',filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" alt=""
+					height="70%" width="70%" style="margin-top: 10%;" />
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="container1" style="margin-top: -4%;">
+		<div class="row">
+			<div class="col-12 col-lg-10">
+				<h5 style="color: red">Disclaimer :</h5>
+				<p>Please read the Refund and Cancellation Policy given below</p>
+				<h5 style="color: red text-center">REFUND & CANCELLATION POLICY</h5>
+				<div>
+					<h6 style="color: navy">Refund and Cancellation Policy given below.</h6>
+					<p style="color: navy; font-weight: lighter">
+						Our focus is complete customer satisfaction. In the event, if you are displeased with the
+						services provided, we will refund back the money, provided the reasons are genuine and proved
+						after investigation. Please read the fine prints of each deal before buying it, it provides all
+						the details about the services or the product you purchase.</br>
+					</p>
+					<p style="color: navy; font-weight: lighter">
+						In case of dissatisfaction from our services, clients have the liberty to cancel their projects
+						and request a refund from us. Our Policy for the cancellation and refund will be as
+						follows:</br>
+					</p>
+				</div>
+				<h6 style="color: navy">Cancellation Policy</h6>
+				<p style="color: navy; font-weight: lighter">
+					For Cancellations please contact the us via contact us link. </br>
+				</p>
+				<p style="color: navy; font-weight: lighter">
+					Requests received later than 7 business days prior to the end of the current service period will be
+					treated as cancellation of services for the next service period.</br>
+				</p>
+
+				<h6 style="color: navy">Refund Policy</h6>
+				<p style="color: navy; font-weight: lighter">
+					We will try our best to create the suitable design concepts for our clients.</br>
+				</p>
+				<p style="color: navy; font-weight: lighter">
+					In case any client is not completely satisfied with our products we can provide a refund.
+				</p>
+				<h6 style="color: navy">LINKS TO THE OTHER SITES</h6>
+				<p style="color: navy; font-weight: lighter">
+					If paid by credit card, refunds will be issued to the original credit card provided at the time of
+					purchase and in case of payment gateway name payments refund will be made to the same account.
+				</p>
+			</div>
+		</div>
+</section>
+
+{% endblock %}
+
+
+{% block script %}
+
+
+{% endblock %}

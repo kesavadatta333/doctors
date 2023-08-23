@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+<style>
+
+@keyframes scaleAnimation {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1); /* You can adjust the scale factor as per your preference */
+    }
+  }
+  
+  .registerBtn {
+    display: inline-block;
+    padding: 5px 20px;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    background-color: blue;
+    color: white;
+    border-radius: 2px;
+  }
+  
+  .registerBtn {
+    animation: scaleAnimation 2s infinite;
+  }
+
+.gamesSection{
+    width: 90%;
+    margin: auto;
+    padding: 5% 0% 5% 10%;
+}
+.cardContainer{
+    display: flex;
+    flex-wrap:wrap ;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+.gameCard{
+    width: 250px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    border: 1px solid rgb(209, 209, 209);
+}
+.gameCard .text{
+    font-weight: 600;
+     font-family: monospace;
+     font-size: 15px;
+     text-align: left;
+     margin: 20px 0px;
+}
+.option{
+    background-color: bisque;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+.gameCard img{
+    width: 100%;
+    height: 170px;
+}
+.addNewGames{
+    margin-top: 180px;
+}
+footer{
+    margin-top: 200px;
+}
+.quickLinks {
+    margin-top: 20px;
+}
+.list-unstyled>li {
+    color:grey;
+}
+.quickLinks a{
+text-decoration: none;
+color: grey;
+}
+
+.quickLinks a:hover{
+    text-decoration: none;
+    color: black;
+    }
+
+
+.socialLinks {
+    font-weight: bold;
+    color:lightseagreen;
+}
+
+.message {
+    font-size: 30px;
+}
+
+  .codegnan {
+    color: white;
+    text-decoration: none;
+  }
+  .select-box-container {
+        display: none;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'dashboard-head.html' %}
+
+<section class="gamesSection">
+    <h2>Registered Games</h2><br />
+    <div class="container">
+        <div class="row">
+            {% for i in games %}
+            <div class="card col-12 col-md-3 m-3" style="width: 15rem;">
+                <img src="{{ url_for('static', filename='games/' + i[0] + '.webp') }}" class="card-img-top p-2"
+                    alt="...">
+
+                <div class="card-body">
+                        <h5 class="card-title">{{i[0]}}</h5>
+                        {% if i[0] in sls %}
+                        <a href="{{url_for('registeredgame',game=i[0])}}" class="btn btn-primary">See Details</a>
+                        {% elif i[0] in ivs %}
+                        <a href="{{url_for('registeredgame',game=i[0])}}" class="btn btn-primary">Select Options</a>
+                        {% else %}
+                        {% if i[1]>=5000 %}
+                        <a href="{{url_for('registeredgame',game=i[0])}}" class="btn btn-primary">Select Options</a>
+                        {% else %}
+                        <a href="{{url_for('registeronteam',game=i[0])}}" class="btn btn-primary">see details</a>
+                        {% endif %}
+                        {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div><br />
+
+
+    <h2>Add On Games</h2><br />
+    <h2>Individual Games</h2>
+    <div class="container">
+        <!-- 1 -->
+    <div class="container">
+        <!-- First Row -->
+        <div class="row">
+            {% for i in add_individual_games %}
+            <div class="card col-12 col-md-3 m-3" style="width: 15rem;">
+                <img src="{{ url_for('static', filename='games/' + i[0] + '.webp') }}" class="card-img-top p-2" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i[0] }}</h5>
+                    <label>
+                        <input type="checkbox" name="selected_games" value="{{ i[0] }}" class="game-checkbox">
+                        Select
+                    </label>
+                </div>
+                <div class="select-box-container">
+                    <select class="custom-select select-game">
+                        <!-- <option value="" selected disabled>Select Option</option> -->
+                        <option value="{{ i[1] }}">Select {{ i[0] }}</option>
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Add more rows here if needed -->
+
+</div>
+
+
+        
+        <div>
+            <p>Total Price:₹ <span id="totalPrice">0</span></p>
+            <a id="payNowButton" class="btn btn-primary">Pay Now</a>
+        </div>
+        
+        <br>
+
+                <h2>Team Games - Register as Captain</h2><br />
+                <div class="container">
+                    <!-- 1 -->
+                    <div class="row">
+                        {% for i in add_teams_games %}
+                        <div class="card col-12 col-md-3 m-3" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='games/' + i[0] + '.webp') }}" class="card-img-top p-2" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{i[0]}}</h5>
+                        <a href="{{url_for('buyaddons',game=i[0])}}" class="btn btn-primary">Select Options</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                        
+            </div>
+
+        </div>
+    </div>
+
+            
+</section>
+
+
+{% endblock %}
+
+{% block script %}
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Get references to the necessary elements
+        const checkboxes = document.querySelectorAll('.game-checkbox');
+        const totalPriceElement = document.getElementById('totalPrice');
+        const payNowButton = document.getElementById('payNowButton');
+
+        // Calculate the total price and update the price box
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const card = checkbox.closest('.card');
+                    const priceSelect = card.querySelector('.select-game');
+                    const selectedPrice = parseFloat(priceSelect.value);
+                    totalPrice += selectedPrice;
+                }
+            });
+
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+        }
+
+        // Add event listeners to checkboxes and selects
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', calculateTotalPrice);
+        });
+
+        // Call calculateTotalPrice on page load
+        calculateTotalPrice();
+
+        // Add click event listener to the "Pay Now" button
+        payNowButton.addEventListener('click', () => {
+            // Disable the button to prevent multiple clicks
+            payNowButton.disabled = true;
+
+            // Create an array to store selected game names
+            const selectedGames = [];
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedGames.push(checkbox.value);
+                }
+            });
+
+            // Make an AJAX POST request to initiate the payment process
+            $.ajax({
+                url: "/buyaddon", // Replace with the correct URL
+                method: 'POST',
+                data: JSON.stringify(selectedGames),
+                contentType: 'application/json',
+                success: function (data) {
+                    // Calculate total price
+                    const totalPrice = parseFloat(totalPriceElement.textContent);
+
+                    // Construct the payment URL with eid, game names, and total amount
+                    const paymentUrl = `/addonpayment/${data.eid}/${selectedGames.join(',')}/${data.amount}`;
+
+                    // Redirect the user to the payment gateway page
+                    window.location.href = paymentUrl;
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error initiating payment:', error);
+                    // Re-enable the button so the user can try again
+                    payNowButton.disabled = false;
+                }
+            });
+        });
+    </script>
+
+
+
+
+<!-- Rest of your HTML code -->
+
+<script src="https://kit.fontawesome.com/ea6d4fec5e.js" crossorigin="anonymous"></script>
+{% endblock %}

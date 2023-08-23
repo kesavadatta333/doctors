@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Display</title>
+<style>
+    /* Add any additional CSS styles here if needed */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgba(206, 238, 255, 0.8);
+        padding: 20px;
+    }
+
+    .payment-table {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .payment-table table {
+        border-collapse: collapse;
+        /* Add this line to control table borders */
+        width: 100%;
+        /* Added width to ensure table takes full width */
+    }
+
+    .payment-table th {
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #ccc;
+        background-color: #007bff;
+        /* Color applied to table headers */
+        color: #ffffff;
+        /* Text color for table headers */
+    }
+
+    .payment-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        /* Add this line to apply borders to cells */
+        /* text-align: center; */
+        vertical-align: middle;
+    }
+
+    .payment-table b {
+        font-weight: bold;
+    }
+</style>
+
+</head>
+<body>
+    {% include 'admin-head.html' %}
+    <div id="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="payment-table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile No</th>
+                                <th>Age</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in pgames %}
+                                <tr>
+                                    <td>{{ i[0] }}</td>
+                                
+                                
+                                    <td>{{ i[4] }} {{ i[5] }}</td>
+                                    <td>{{i[6]}}</td>
+                                    <td>{{i[8]}}</td>
+                                    <td>{{i[9]}}</td>
+                                
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

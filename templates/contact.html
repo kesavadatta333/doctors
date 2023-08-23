@@ -1,0 +1,461 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+<style>
+    * {
+        font-family: "Roboto";
+    }
+    .gamesSection{
+        padding: 0% 0% 5% 0%;
+        
+    }
+
+    /* Members */
+    .members {
+        background-color: #23527c;
+        padding: 15px;
+    }
+
+    .text {
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .National-committee ul {
+        padding: 0;
+    }
+
+    .National-committee ul li {
+        list-style: none;
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 8px;
+    }
+
+    .National-committee ul li span {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    /* Image Head */
+    .image-container {
+        width: 100%;
+        max-width: 600px;
+        margin:auto;
+        padding: 10% 0% 0% 0%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .image-container img {
+        width: 75%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+        .image-container {
+            max-width: 100%;
+        }
+    }
+
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+        .image-container {
+            max-width: 100%;
+        }
+    }
+
+    .gamesSection {
+        margin-top: -1%;
+    }
+
+    @media screen and (max-width:768px) {
+        .gamesSection {
+            margin-top: -4% !important;
+        }
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+<section class="gamesSection" style="background-color: rgba(206,238,255,0.8);margin-top: 0.5%;">
+    <section class="National-committee">
+        <div class="image-container">
+            <img src="{{url_for('static',filename='images/IMA-NATIONAL-SPORTS-MEET-2023-LOGO.webp')}}" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">CRICKET</h6>
+                    <ul class="list-membars">
+                        <li>DR.B.RAKESH TEAM LEAD &nbsp; &nbsp;<span>9866115792</span></li>
+                        <li>DR MADHU MURARI&nbsp; &nbsp;&nbsp;<span>9985191966</span></li>
+                        <li>DR.BHAVANCHAND Y &nbsp; &nbsp;&nbsp;<span>9032229707</span></li>
+                        <li>DR SAI PAVAN A &nbsp; &nbsp;&nbsp;<span>9000074447</span></li>
+                        <li>DR SRI HARSHA A &nbsp; &nbsp;&nbsp;<span>9014161234</span></li>
+                        <li>DR SIVA SAI KRISHNA &nbsp; &nbsp;&nbsp;<span>9989275575</span></li>
+                        <li>DR SUDHEER&nbsp; &nbsp;&nbsp;<span>8919103232</span></li>
+                        <li>DR SUNIL B &nbsp; &nbsp;&nbsp;<span>8074120467</span></li>
+                        <li>DR UDAY KIRAN S &nbsp; &nbsp;&nbsp;<span>9000371124</span></li>
+                        <li>DR KUMAR RAJA G &nbsp; &nbsp;&nbsp;<span>9866495595</span></li>
+                        <li>DR VISHAL REDDY I &nbsp; &nbsp;&nbsp;<span>9704755669</span></li>
+                        <li>DR PAVAN V &nbsp; &nbsp;&nbsp;<span>7207241315</span></li>
+                        <li>DR B SASIDHAR &nbsp; &nbsp;&nbsp;<span>6281340255</span></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">TENNIS</h6>
+                    <ul class="list-membars">
+                        <li>DR JAIDEV TEAM LEAD &nbsp; &nbsp;&nbsp;<span>8790739137</span></li>
+                        <li>DR S RAMA KRISHNA &nbsp; &nbsp;&nbsp;<span>9849083137</span></li>
+                        <li>DR SRIDHAR NARAYANA &nbsp; &nbsp;&nbsp;<span>9949444565</span></li>
+                        <li>DR SURENDRA G &nbsp; &nbsp;&nbsp;<span>9848428008</span></li>
+                        <li>DR M J NAIDU &nbsp; &nbsp;&nbsp;<span>9966122222</span></li>
+                        <li>DR SATYANARAYANA K V &nbsp; &nbsp;&nbsp;<span>9866904338</span></li>
+
+
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">VOLLEY BALL</h6>
+                    <ul class="list-membars">
+                        <li>DR. BUJJI BABU TEAM LEAD&nbsp; &nbsp;&nbsp;<span>9866161166</span></li>
+                        <li>DR KIRAN G&nbsp; &nbsp;&nbsp;<span>9849966431</span></li>
+                        <li>DR. AKSHARA&nbsp; &nbsp;&nbsp;<span>9492919797</span></li>
+                        <li>DR R VIDYA SAGAR&nbsp; &nbsp;&nbsp;<span>9989084747</span></li>
+                        <li>DR PRASANNA KUMAR&nbsp; &nbsp;&nbsp;<span>8522942294</span></li>
+                        <li>DR RAVI KUMAR&nbsp; &nbsp;&nbsp;<span>9849990734</span></li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">CARROM BOARD</h6>
+                    <ul class="list-membars">
+                        <li>DR MADHU K &nbsp; &nbsp;&nbsp;<span>9848161080</span></li>
+                        <li>DR SURYANARAYANA A &nbsp; &nbsp;&nbsp;<span>9848619698</span></li>
+
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">FOOT BALL</h6>
+                    <ul class="list-membars">
+                        <li>DR A SAI PAVAN TEAM LEAD &nbsp; &nbsp;&nbsp;<span>9000074447</span></li>
+                        <li>DR G KIRAN &nbsp; &nbsp;&nbsp;<span>9849966431</span></li>
+
+
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">CHESS</h6>
+                    <ul class="list-membars">
+                        <li>DR MADHU K &nbsp; &nbsp;&nbsp;<span>9848161080</span></li>
+                        <li>DR SURYANARAYANA A &nbsp; &nbsp;&nbsp;<span>9848619698</span></li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">SWIMMING</h6>
+                    <ul class="list-membars">
+                        <li> DR K RAVI KANTH TEAM LEAD &nbsp; &nbsp;&nbsp;<span>8885218888</span></li>
+                        <li>DR P M C NAIDU &nbsp; &nbsp;&nbsp;<span>9030081248</span></li>
+
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">TABLE TENNIS</h6>
+                    <ul class="list-membars">
+                        <li>DR GOWTHAM MUKESH TEAM LEAD &nbsp; &nbsp;&nbsp;<span>7708868699</span></li>
+                        <li>DR HAMEED RAZA &nbsp; &nbsp;&nbsp;<span>9177707606</span></li>
+                        <li>DR ANIL KUMAR P&nbsp; &nbsp;&nbsp;<span>9848527270</span></li>
+
+                    </ul>
+                </div>
+
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">ARCHERY & SHOOTING</h6>
+                    <ul class="list-membars">
+                        <li>DR K ANIL &nbsp; &nbsp;&nbsp;<span>9849507290</span></li>
+                        <li>DR SAGAR &nbsp; &nbsp;&nbsp;<span>9494758476</span></li>
+                        <li>DR DVS SRIDHAR &nbsp; &nbsp;&nbsp;<span>9440541986</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">BASKET BALL</h6>
+                    <ul class="list-membars">
+                        <li>DR SONYLAL TEAM LEAD &nbsp; &nbsp;&nbsp;<span>9849872888</span></li>
+                        <li>DR MOHAN PRASAD &nbsp; &nbsp;&nbsp;<span>9849082522</span></li>
+                        <li>DR AKARSH K &nbsp; &nbsp;&nbsp;<span>9989104010</span></li>
+                        <li>DR G SARAT CHANDRA &nbsp; &nbsp;&nbsp;<span>9677158388</span></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">BADMINTON</h6>
+                    <ul class="list-membars">
+                        <li>DR B SUNEEL TEAM LEAD &nbsp; &nbsp;&nbsp;<span>9440017668</span></li>
+                        <li>DR VENKAT V &nbsp; &nbsp;&nbsp;<span>9490438306</span></li>
+                        <li>DR GOPALA KRISHNA M &nbsp; &nbsp;&nbsp;<span>9985926715</span></li>
+                        <li>DR SASIDHAR B &nbsp; &nbsp;&nbsp;<span>6281340255</span></li>
+                        <li>DR BINDHU P &nbsp; &nbsp;&nbsp;<span>9701051234</span></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">THROW BALL</h6>
+                    <ul class="list-membars">
+                        <li>DR CH KEERTHI &nbsp; &nbsp;&nbsp;<span>9949591155</span></li>
+                        <li>DR PAWANA PHANI V &nbsp; &nbsp;&nbsp;<span>9966603564</span></li>
+                        <li>DR BHARGAV G &nbsp; &nbsp;&nbsp;<span>8333084664</span></li>
+                        <li>DR CHAITRA S &nbsp; &nbsp;&nbsp;<span>9440374299</span></li>
+                        <li>DR TEJ PAVAN T &nbsp; &nbsp;&nbsp;<span>9849691135</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">ROWING</h6>
+                    <ul class="list-membars">
+                        <li>DR SARITHA K &nbsp; &nbsp;&nbsp;<span>9490860454</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">ROLLER SKATING</h6>
+                    <ul class="list-membars">
+                        <li>DR M KIRAN &nbsp; &nbsp;&nbsp;<span>9966238456</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">KHO KHO</h6>
+                    <ul class="list-membars">
+                        <li>DR KEERTHI CH &nbsp; &nbsp;&nbsp;<span>9949591155</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">CYCLING</h6>
+                    <ul class="list-membars">
+                        <li>DR ANIL K &nbsp; &nbsp;&nbsp;<span>9849507290</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">FENCING</h6>
+                    <ul class="list-membars">
+                        <li>DR SONY LAL &nbsp; &nbsp;&nbsp;<span>9849872888</span></li>
+
+                    </ul>
+                </div>
+
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">KABADDI</h6>
+                    <ul class="list-membars">
+                        <li>DR M KIRAN &nbsp; &nbsp;&nbsp;<span>9966238456</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">TUG OF WAR</h6>
+                    <ul class="list-membars">
+                        <li>DR SRUTHI KSL &nbsp; &nbsp;&nbsp;<span>9866497000</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">MARATHON</h6>
+                    <ul class="list-membars">
+                        <li>DR SRUTHI KSL &nbsp; &nbsp;&nbsp;<span>9866497000</span></li>
+                        <li>DR VENKAT V &nbsp; &nbsp;&nbsp;<span>9490438306</span></li>
+                        <li>DR M KIRAN &nbsp; &nbsp;&nbsp;<span>9966238456</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">WALKATHON</h6>
+                    <ul class="list-membars">
+                        <li>DR VENKAT V &nbsp; &nbsp;&nbsp;<span>9490438306</span></li>
+                        <li>DR CHAITRA S &nbsp; &nbsp;&nbsp;<span>9440374299</span></li>
+                        <li>DR M KIRAN &nbsp; &nbsp;&nbsp;<span>9966238456</span></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-12">
+                    <h6 class="mt-5 members text">TRACK & FIELD</h6>
+                    <ul class="list-membars">
+                        <li>DR K SANTOSH TEAM LEAD &nbsp; &nbsp;&nbsp;<span>9866053184</span></li>
+                        <li>DR B NAGESWARA RAO &nbsp; &nbsp;&nbsp;<span>9885675906</span></li>
+                        <li>DR PAVAN KUMAR K &nbsp; &nbsp;&nbsp;<span>8142280222</span></li>
+                        <li>DR ANVESH G &nbsp; &nbsp;&nbsp;<span>8332858057</span></li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12">
+                <h1 class="mt-5 members text">ADMIN</h1>
+
+            </div>
+
+            <section class="National-committee">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">ACCOMMODATION</h6>
+                            <ul class="list-membars">
+                                <li>DR KAUSHIK SURAPANENI &nbsp; &nbsp;<span>9703340101</span></li>
+                                <li>DR BHAVANCHAND Y &nbsp; &nbsp;&nbsp;<span>9032229707</span></li>
+                                <li>DR SHRAVAN MEDIKONDA &nbsp; &nbsp;&nbsp;<span>9703443322</span></li>
+                                <li>DR PRATHYUSHA JAVVADI &nbsp; &nbsp;&nbsp;<span>9966641326</span></li>
+                                <li>DR KAVYA MIKKINENI &nbsp; &nbsp;&nbsp;<span>9966671377</span></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">CULTURAL</h6>
+                            <ul class="list-membars">
+                                <li>DR SONYLAL E &nbsp; &nbsp;&nbsp;<span>9849872888</span></li>
+                                <li>DR B SASIDHAR &nbsp; &nbsp;&nbsp;<span>6281340255</span></li>
+                                <li>DR AKSHARA &nbsp; &nbsp;&nbsp;<span>9989104010</span></li>
+                                <li>DR RAVIKANTH M &nbsp; &nbsp;&nbsp;<span>9440174463</span></li>
+                                <li>DR SRUTHI KSL &nbsp; &nbsp;&nbsp;<span>9866497000</span></li>
+                                <li>DR MALLIKA B &nbsp; &nbsp;&nbsp;<span>8096453675</span></li>
+                                <li>DR SUSHMA SURAPANENI &nbsp; &nbsp;&nbsp;<span>9849180856</span></li>
+                                <li>DR MOUNIKA &nbsp; &nbsp;&nbsp;<span>9492979979</span></li>
+
+
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">MARKETING</h6>
+                            <ul class="list-membars">
+                                <li>DR ANUROOP T &nbsp; &nbsp;&nbsp;<span>8977030023</span></li>
+                                <li>DR BHAVANCHAND Y &nbsp; &nbsp;&nbsp;<span>9032229707</span></li>
+                                <li>DR K DHEERAJ &nbsp; &nbsp;&nbsp;<span>9885387377</span></li>
+                                <li>DR K ANIL &nbsp; &nbsp;&nbsp;<span>9849507290</span></li>
+                                <li>DR UDAY C &nbsp; &nbsp;&nbsp;<span>9703170007</span></li>
+                                <li>DR SAI PAVAN &nbsp; &nbsp;&nbsp;<span>9000074447</span></li>
+                                <li>DR MADHU MURARI &nbsp; &nbsp;&nbsp;<span>9985191966</span></li>
+                                <li>DR KIRAN G &nbsp; &nbsp;&nbsp;<span>9849966431</span></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">LIVE TELECAST, IT</h6>
+                            <ul class="list-membars">
+                                <li>DR ANUROOP T &nbsp; &nbsp;&nbsp;<span>8977030023</span></li>
+                                <li>DR BHAVANCHAND Y &nbsp; &nbsp;&nbsp;<span>9032229707</span></li>
+                                <li>DR MADHU MURARI &nbsp; &nbsp;&nbsp;<span>9985191966</span></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">REGISTRATION & RECEPTION</h6>
+                            <ul class="list-membars">
+                                <li>DR A SIVA RAM <span>9703040401</span></li>
+                                <li>DR SRUTHI KSL <span>9866497000</span></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">FOOD & BEVERAGE</h6>
+                            <ul class="list-membars">
+                                <li>DR V SURESH &nbsp; &nbsp;&nbsp;<span>8121030245</span></li>
+                                <li>DR BHUPAL V &nbsp; &nbsp;&nbsp;<span>9885303344</span></li>
+                                <li>DR ANVESH K &nbsp; &nbsp;&nbsp;<span>9940277211</span></li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">TRANSPORT</h6>
+                            <ul class="list-membars">
+                                <li>DR M V SUBBA RAO &nbsp; &nbsp;&nbsp;<span>9849967817</span></li>
+                                <li>DR RAVINDRA REDDY &nbsp; &nbsp;&nbsp;<span>9885234757</span></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">ACCOUNTS</h6>
+                            <ul class="list-membars">
+                                <li>DR M V SUBBA RAO &nbsp; &nbsp;&nbsp;<span>9849967817</span></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <h6 class="mt-5 members text">SPORTS MEDICINE CME</h6>
+                            <ul class="list-membars">
+                                <li>DR R PAVAN KUMAR &nbsp; &nbsp;&nbsp;<span>9949584335</span></li>
+                                <li>DR.PRASHANTH CHALASANI &nbsp; &nbsp;&nbsp;<span>9966633389</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+            </section>
+    </section>
+    {% endblock %}
+
+    {% block script %}
+
+
+    {% endblock %}
