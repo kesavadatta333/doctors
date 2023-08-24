@@ -331,32 +331,6 @@
 
                         <div class="col-md-6 mb-4">
                             <div class="form-outline">
-                                <label class="form-label" for="firstName">Select Member<span
-                                        style="color: red;">*</span></label>
-                                <select class="form-select" aria-label="Default select example" name="selectmember"
-                                    onchange="toggleInputField()" id="selectmember" required>
-                                    <option disabled selected>Select Member</option>
-                                    <option value="IMA Member">IMA Member-₹3500/</option>
-                                    <option value="Non IMA Member">Non IMA Member-₹4000/</option>
-                                </select>
-                            </div>
-                            <div class="form-outline" id="extraInput" style="display: none; margin-top: 7% !important;">
-                                <label class="form-label" for="extraField">IMA Membership Number<span
-                                        style="color: red;">*</span></label>
-
-                                <input type="text" name="imamembershipnumber" id="extraField"
-                                    class="form-control form-control-lg" placeholder="Enter IMA Membership Number"
-                                    required />
-
-                            </div>
-
-                            <!-- <div id="extraInput" style="display: none;">
-                                <label for="extraField">Extra Input Field:</label>
-                                <input type="text" id="extraField" name="extraField">
-                            </div> -->
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="form-outline">
                                 <label class="form-label" for="firstName">State or MCI Registration No<span
                                         style="color: red;">*</span></label>
 
@@ -453,7 +427,7 @@
                                     <option value="FOOTBALL">FOOTBALL</option>
                                     <option value="KABADDI">KABADDI</option>
                                     <option value="KHO KHO">KHO KHO</option>
-                                    <option value="LAWN TENffNIS">LAWN TENNIS</option>
+                                    <option value="LAWN TENNIS">LAWN TENNIS</option>
                                     <option value="ROLLER SKATING">ROLLER SKATING</option>
                                     <option value="ROWING">ROWING</option>
                                     <option value="SHOOTING">SHOOTING</option>
@@ -474,14 +448,9 @@
 
                         <div class="col-md-6 mb-4">
                             <div class="form-outline">
-                                <label class="form-label" for="firstName">Food preference<span
-                                        style="color: red;">*</span></label>
-                                <select class="form-select" aria-label="Default select example" name="food" id="degree"
-                                    required>
-                                    <option disabled selected>Select Preference</option>
-                                    <option value="Veg">Veg</option>
-                                    <option value="Non-Veg">Non-Veg</option>
-                                </select>
+                                <input type="checkbox" name="foody" id="foodCheckbox" value="Yes"/>
+                                <label class="form-label" for="foodCheckbox">Add Dinner</label>
+                                <input type="hidden" name="food" id="foodHidden" value="No"/>
                             </div>
                         </div>
 
@@ -524,6 +493,14 @@
                                     Policy</a> and <a href="{{url_for('refund_returns')}}" target="_blank">Return Refund
                                     and Cancellation Policy</a>
                             </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <div class="form-check mb-4">
+                            <label class="form-check-label" id="registrationFee">
+                               <b>Registration fee - ₹ 3000/-</b>
+                            </label>
+                            
                         </div>
                     </div>
 
@@ -830,7 +807,25 @@
 </script>
 
 
+<script>
+    const foodCheckbox = document.getElementById('foodCheckbox');
+    const foodHidden = document.getElementById('foodHidden');
+    const registrationFee = document.getElementById('registrationFee');
 
+    foodCheckbox.addEventListener('change', function() {
+        if (foodCheckbox.checked) {
+            foodHidden.value = 'Yes';
+            registrationFee.textContent = 'Registration fee - ₹ 4000/-';
+            registrationFee.style.fontWeight = 'bold';
+
+        } else {
+            foodHidden.value = 'No';
+            registrationFee.textContent = 'Registration fee - ₹ 3000/-';
+            registrationFee.style.fontWeight = 'bold';
+
+        }
+    });
+</script>
 
 <script>
     function toggleInputField() {

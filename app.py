@@ -331,9 +331,7 @@ def national_committee():
 def ima_ap_state_committee():
     return render_template('ima-ap-state-committe.html')
 
-@app.route('/organising_committee')
-def organising_committee():
-    return render_template('organising-committee.html')
+
 
 
 @app.route('/mission_statement')
@@ -399,11 +397,9 @@ def register():
         degree = request.form['degree']
         mci = request.form['mci']
         game = request.form['game']
-        selectmember = request.form['selectmember']
         shirtsize = request.form['shirtsize']
         otp=request.form['otp']
-        ima_membership_number=request.form['imamembershipnumber'] if request.form['imamembershipnumber']!='' else None
-        food_preference=request.form['food']    
+        food_preference=request.form['food'] 
         cursor = mydb.cursor(buffered=True)
         # cursor.execute('SELECT COUNT(*) FROM register WHERE CONCAT(FirstName, " ", LastName) = %s', [full_name])
         # count = cursor.fetchone()[0]
@@ -440,14 +436,7 @@ def register():
         # Save the certificate and photo files to the upload folder
         certificate_file.save(os.path.join(app.config['UPLOAD_FOLDER'], certificate_filename))
         photo_file.save(os.path.join(app.config['UPLOAD_FOLDERS'], photo_filename))
-
-        
-        if selectmember == 'IMA Member':
-            amount = 3500
-        else:
-            amount = 4000
-        
-        full_name = fname + ' ' + lname  # Combine first name and last name
+        amount=4000 if food_preference=='Yes' else 3000
 
         
         # Hash the password using bcrypt
@@ -457,12 +446,12 @@ def register():
         data = {
             'fname': fname, 'lname': lname, 'email': email, 'password': hashed_password, 'mobile': mobile,
             'age': age, 'gender': gender, 'dob': dob, 'city': city, 'address': address, 'state': state,
-            'country': country, 'degree': degree, 'mci': mci, 'game': game, 'selectmember': selectmember,
-            'amount': amount,'shirtsize': shirtsize,'ima_membership_number':ima_membership_number,
+            'country': country, 'degree': degree, 'mci': mci, 'game': game,
+            'amount': amount,'shirtsize': shirtsize,
             'food_preference':food_preference,
         }
         cursor=mydb.cursor(buffered=True)
-        cursor.execute('INSERT INTO temporary(FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', [data['fname'], data['lname'], data['email'], data['password'], data['mobile'], data['age'], data['gender'], data['dob'], data['city'], data['address'], data['state'], data['country'], data['degree'], data['mci'], data['selectmember'],data['shirtsize'], data['food_preference'],data['ima_membership_number']])
+        cursor.execute('INSERT INTO temporary(FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', [data['fname'], data['lname'], data['email'], data['password'], data['mobile'], data['age'], data['gender'], data['dob'], data['city'], data['address'], data['state'], data['country'], data['degree'], data['mci'],data['shirtsize'], data['food_preference']])
         mydb.commit()
         cursor.execute('select id from temporary where Email=%s and mobileno=%s', [data['email'], data['mobile']])
         eid=cursor.fetchone()[0]
@@ -547,7 +536,7 @@ def check_individual(gender,input_value,game,category):
                     if lead_age>50:
                         cond=False
                         message="User doesn't belong to your age group"
-            if game!='CARROMS':
+            if game  in ('BADMINTON','TABLE TENNIS','TENNIKOIT'):
                 if age<35:
                     if lead_age>35:
                         cond=False
@@ -562,6 +551,19 @@ def check_individual(gender,input_value,game,category):
                         message="User doesn't belong to your age group"
                 elif age>55:
                     if lead_age<55:
+                        cond=False
+                        message="User doesn't belong to your age group"
+            if game =='LAWN TENNIS':
+                if age<40:
+                    if lead_age>40:
+                        cond=False
+                        message="User doesn't belong to your age group"
+                elif age>=40 and age<=54:
+                    if not (lead_age>=40 and lead_age<=54):
+                        cond=False
+                        message="User doesn't belong to your age group"
+                elif age>=55:
+                    if lead_age<=55:
                         cond=False
                         message="User doesn't belong to your age group"
             if cond==True:
@@ -815,7 +817,7 @@ def reset_password(token):
 @app.route('/checkout-order-pay/<eid>/<game>/<amount>', methods=['GET', 'POST'])
 def payment(eid,game,amount):
     cursor = mydb.cursor(buffered=True)
-    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, member FROM temporary WHERE id=%s", [eid])
+    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo,MCI_ID FROM temporary WHERE id=%s", [eid])
     data1 = cursor.fetchall()
     cursor.execute('SELECT email from temporary where id=%s',[eid])
     email=cursor.fetchone()[0]
@@ -855,7 +857,7 @@ def success():
             #status=cursor.fetchone()[0]
             cursor.execute('select gender,email from temporary where id=%s',[eid])
             gender,email=cursor.fetchone()
-            cursor.execute('insert into register (FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no) select FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no from temporary where id=%s',[eid])
+            cursor.execute('insert into register (FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference) select FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from temporary where id=%s',[eid])
             mydb.commit()
             cursor.execute('SELECT id from register where email=%s',[email])
             uid=cursor.fetchone()[0]
@@ -870,7 +872,7 @@ def success():
                  cursor.execute('insert into sub_games (game,id,category) values(%s,%s,%s)',[game,uid,category])
                  mydb.commit()
                 #  print(details)
-            cursor.execute("SELECT ID,concat(FirstName,' ' , LastName) AS FullName, Email, CONCAT('+91', '', mobileno) AS mobile, age, gender, DOB, city, address, state, country, degree, MCI_ID, member, shirt_size, food_preference, ima_reg_no FROM register WHERE id = %s", [uid])
+            cursor.execute('select ID,Concat(FirstName," ",LastName),Email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from register where id=%s',[uid])
             deta=cursor.fetchone()+(game,)
             cursor.close()
             html = f"""
@@ -941,19 +943,14 @@ def success():
             # body=f'Hi {name},\n\nThanks for registering to {game} in Doctors Olympiad 2023\n\n\n\nunique reference id:{uid}\nName: {name}\n accept game: {game}\nTransaction id: {transaction_id}\n\n\n\n\nThanks and Regards\nDoctors Olympiad 2023\n\n\nContact:+91 9759634567'
             mail_with_atc(to=email, subject=subject, html=html)
             scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-            credentials = ServiceAccountCredentials.from_json_keyfile_name('decoded-app-396706-566512d1ca79.json', scope)
+            credentials = ServiceAccountCredentials.from_json_keyfile_name('doctors-395609-f33b54a9ab5b.json', scope)
             client = gspread.authorize(credentials)
             spreadsheet = client.open('doctors')  # Replace 'doctors' with your actual sheet name
             worksheet = spreadsheet.get_worksheet(0)
             deta_str = [str(item) for item in deta]  # Convert all items to strings
             worksheet.append_row(deta_str)
             flash('Payment Successful')
-            if session.get('user')==231001:
-                return redirect(url_for('decor'))
-                # Log the user in by setting the 'user' in the session
-            else:
-                return redirect(url_for('dashboard'))
-            # return redirect(url_for('dashboard'))
+            return redirect(url_for('dashboard'))
             # print(response)
             # Payment is successful
             # return render_template('thank-you.html')
@@ -965,13 +962,6 @@ def success():
     else:
         # 'Response_Code' key is missing in the response
         return "Invalid response received from payment gateway."
-    
-
-@app.route('/decor')
-def decor():
-    return render_template("decors.html")
-
-
 """"
 @app.route('/sport/<game>',methods=['GET','POST'])
 def sport(game):
@@ -1070,7 +1060,7 @@ def edit_profile():
     if session.get('user'):
         cursor=mydb.cursor(buffered=True)
         eid=session.get('user')
-        cursor.execute("select id,firstname,lastname,email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no from register where id =%s",[eid])
+        cursor.execute("select id,firstname,lastname,email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from register where id =%s",[eid])
         data=cursor.fetchone()
         
         cursor.execute("select mobileno from register where id =%s",[eid])
@@ -1095,15 +1085,14 @@ def edit_profile():
             country=request.form['country']
             shirtsize=request.form['shirtsize']
             mci_id=request.form['mci']
-            ima_reg_no=request.form['ima_reg_no']
             food_preference=request.form['food_preference']
             cursor=mydb.cursor(buffered=True)
-            cursor.execute('update register set FirstName=%s,LastName=%s,city=%s,address=%s,state=%s,country=%s,SHIRT_SIZE=%s,IMA_REG_NO=%s,mci_id=%s,food_preference=%s where id=%s',[firstname,lastname,city,address,state,country,shirtsize,ima_reg_no,mci_id,food_preference,session.get('user')])
+            cursor.execute('update register set FirstName=%s,LastName=%s,city=%s,address=%s,state=%s,country=%s,SHIRT_SIZE=%s,mci_id=%s where id=%s',[firstname,lastname,city,address,state,country,shirtsize,mci_id,session.get('user')])
             mydb.commit()
             cursor.close()
             cursor=mydb.cursor(buffered=True)
             eid=session.get('user')
-            cursor.execute("select id,firstname,lastname,email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no from register where id =%s",[eid])
+            cursor.execute("select id,firstname,lastname,email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from register where id =%s",[eid])
             data=cursor.fetchone()
             cursor.close()
             flash('Profile updated')
@@ -1187,9 +1176,15 @@ def buyaddons(game):
         cursor=mydb.cursor(buffered=True)
         cursor.execute("""SELECT COUNT(*) FROM game WHERE id = %s AND game NOT IN ('ATHLETICS', 'ARCHERY', 'BADMINTON', 'CARROMS', 'CHESS', 'CYCLOTHON', 'WALKATHON', 'SWIMMING', 'TENNIKOIT', 'THROW', 'ROWING', 'ROLLER SKATING', 'FENCING', 'SHOOTING', 'TABLE TENNIS', 'LAWN TENNIS')""", (session.get('user'),))
         count4=cursor.fetchone()[0]
+        cursor.execute('SELECT gender from register where id=%s',[session.get('user')])
+        gender=cursor.fetchone()[0]
         cursor.close()
+
         if count4>=2:
             flash('You are already in two teams')
+            return redirect(url_for('dashboard'))
+        elif game=='THROW BALL' and gender=='Male':
+            flash('Throw ball can only be played by Female players.')
             return redirect(url_for('dashboard'))
         else:
             cursor=mydb.cursor(buffered=True)
@@ -1202,7 +1197,7 @@ def buyaddons(game):
 @app.route('/addonpayment/<eid>/<game>/<amount>',methods=['GET','POST'])
 def addonpayment(eid,game,amount):
     cursor = mydb.cursor(buffered=True)
-    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, member FROM register WHERE id=%s", [eid])
+    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, MCI_ID FROM register WHERE id=%s", [eid])
     data1 = cursor.fetchall()
     cursor.execute('SELECT email from register where id=%s',[eid])
     email=cursor.fetchone()[0]
@@ -1376,7 +1371,7 @@ def registeredgame(game):
                         mydb.commit()
                     cursor.close()
                     subject='Doctors Olympiad Games registration'
-                    body=f'You are successfully accept to {" ".join(request.form.values())}\n\nThanks and regards\nDoctors Olympiad 2023'
+                    body=f'You are successfully registered to {" ".join(request.form.values())}\n\nThanks and regards\nDoctors Olympiad 2023'
                     sendmail(email_id,subject,body)
                     return redirect(url_for('dashboard'))
             return render_template(f'/games-individual-team/Individual/{game}.html')
@@ -1429,7 +1424,7 @@ def registeredgame(game):
                     cursor.close()
                     flash('Details accepted Successfully ')
                     subject='Doctors Olympiad Games registration'
-                    body=f'You are successfully accepted to {"/n".join(values)}\n\nThanks and regards\nDoctors Olympiad 2023'
+                    body=f'You are successfully registered to {"/n".join(values)}\n\nThanks and regards\nDoctors Olympiad 2023'
                     sendmail(email_id,subject,body)
                     return redirect(url_for('dashboard'))
             return render_template(f'/games-individual-team/Individual/{game}.html',gender=gender)
@@ -1499,12 +1494,12 @@ def registeredgame(game):
                     cursor.close()
                     flash('Details accepted Successfully ')
                     subject='Doctors Olympiad Games registration'
-                    body=f'You are successfully accepted to {" ".join(values)}\n\nThanks and regards\nDoctors Olympiad 2023'
+                    body=f'You are successfully registered to {" ".join(values)}\n\nThanks and regards\nDoctors Olympiad 2023'
                     sendmail(email_id,subject,body)
                     return redirect(url_for('dashboard'))
             return render_template(f'/games-individual-team/Individual/{game}.html',gender=gender)
 
-        elif game in ('BADMINTON','TABLE TENNIS','LAWN TENNIS','CARROMS'):
+        elif game in ('BADMINTON','TABLE TENNIS','LAWN TENNIS','CARROMS','TENNIKOIT'):
             ds="Mens Doubles" if gender=="Male" else "Womens Doubles"
             bs="Mens Single" if gender=="Male" else "Womens Single"
             dic={}
@@ -1785,10 +1780,8 @@ def registeron(token):
             degree = request.form['degree']
             mci = request.form['mci']
             game = request.form['game']
-            selectmember = request.form['selectmember']
             shirtsize = request.form['shirtsize']
             otp=request.form['otp']
-            ima_membership_number=request.form['imamembershipnumber'] if request.form['imamembershipnumber']!='' else None
             food_preference=request.form['food']    
             cursor = mydb.cursor(buffered=True)
             # cursor.execute('SELECT COUNT(*) FROM register WHERE CONCAT(FirstName, " ", LastName) = %s', [full_name])
@@ -1835,13 +1828,7 @@ def registeron(token):
             photo_file.save(os.path.join(app.config['UPLOAD_FOLDERS'], photo_filename))
 
             
-            if selectmember == 'IMA Member':
-                amount = 3500
-            else:
-                amount = 4000
-            
-            full_name = fname + ' ' + lname  # Combine first name and last name
-
+            amount=4000 if food_preference=='Yes' else 3000
             
             # Hash the password using bcrypt
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -1850,12 +1837,11 @@ def registeron(token):
             data = {
                 'fname': fname, 'lname': lname, 'email': email, 'password': hashed_password, 'mobile': mobile,
                 'age': age, 'gender': gender, 'dob': dob, 'city': city, 'address': address, 'state': state,
-                'country': country, 'degree': degree, 'mci': mci, 'game': game, 'selectmember': selectmember,
-                'amount': amount,'shirtsize': shirtsize,'ima_membership_number':ima_membership_number,
+                'country': country, 'degree': degree, 'mci': mci, 'game': game,'amount': amount,'shirtsize': shirtsize,
                 'food_preference':food_preference,
             }
             cursor=mydb.cursor(buffered=True)
-            cursor.execute('INSERT INTO temporary(FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', [data['fname'], data['lname'], data['email'], data['password'], data['mobile'], data['age'], data['gender'], data['dob'], data['city'], data['address'], data['state'], data['country'], data['degree'], data['mci'], data['selectmember'],data['shirtsize'], data['food_preference'],data['ima_membership_number']])
+            cursor.execute('INSERT INTO temporary(FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', [data['fname'], data['lname'], data['email'], data['password'], data['mobile'], data['age'], data['gender'], data['dob'], data['city'], data['address'], data['state'], data['country'], data['degree'], data['mci'],data['shirtsize'], data['food_preference']])
             mydb.commit()
             cursor.execute('select id from temporary where Email=%s and mobileno=%s', [data['email'], data['mobile']])
             eid=cursor.fetchall()[-1][0]
@@ -1886,7 +1872,7 @@ def link_validator(token):
 @app.route('/checkout-addon-payc/<eid>/<game>/<amount>/<rid>', methods=['GET', 'POST'])
 def payment_add_on_c(eid,game,amount,rid):
     cursor = mydb.cursor(buffered=True)
-    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, member FROM temporary WHERE id=%s", [eid])
+    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, MCI_ID FROM temporary WHERE id=%s", [eid])
     data1 = cursor.fetchall()
     cursor.execute('SELECT email from temporary where id=%s',[eid])
     email=cursor.fetchone()[0]
@@ -1922,7 +1908,7 @@ def success_c(rid):
             #status=cursor.fetchone()[0]
             cursor.execute('select gender,email from temporary where id=%s',[eid])
             gender,email=cursor.fetchone()
-            cursor.execute('insert into register (FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no) select FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,member,shirt_size,food_preference,ima_reg_no from temporary where id=%s',[eid])
+            cursor.execute('insert into register (FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference) select FirstName,LastName,Email,password,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from temporary where id=%s',[eid])
             mydb.commit()
             cursor.execute('SELECT id from register where email=%s',[email])
             uid=cursor.fetchone()[0]
@@ -1948,7 +1934,7 @@ def success_c(rid):
             elif  i_count==0:
                 message=' Request removed by co player..create your own team or join others'
             
-            cursor.execute("SELECT FirstName, LastName, Email, CONCAT('+91', '', mobileno) AS mobile, age, gender, DOB, city, address, state, country, degree, MCI_ID, member, shirt_size, food_preference, ima_reg_no FROM register WHERE id = %s", [uid])
+            cursor.execute('select ID,CONCAT(FirstName," ",LastName),Email,mobileno,age,gender,DOB,city,address,state,country,degree,MCI_ID,shirt_size,food_preference from register where id=%s',[uid])
             deta=cursor.fetchone()+(game,)
             cursor.close()
             html = f"""
@@ -2019,7 +2005,7 @@ def success_c(rid):
             # body=f'Hi {name},\n\nThanks for registering to {game} in Doctors Olympiad 2023\n\n\n\nunique reference id:{uid}\nName: {name}\ndef accept game: {game}\nTransaction id: {transaction_id}\n\n\n\n\nThanks and Regards\nDoctors Olympiad 2023\n\n\nContact:+91 9759634567'
             mail_with_atc(to=email, subject=subject, html=html)
             scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-            credentials = ServiceAccountCredentials.from_json_keyfile_name('decoded-app-396706-566512d1ca79.json', scope)
+            credentials = ServiceAccountCredentials.from_json_keyfile_name('doctors-395609-f33b54a9ab5b.json', scope)
             client = gspread.authorize(credentials)
             spreadsheet = client.open('doctors')  # Replace 'doctors' with your actual sheet name
             worksheet = spreadsheet.get_worksheet(0)
@@ -2256,7 +2242,7 @@ def archive_and_send():
 def individual_accept(token):
     data=link_validator(token)
     if data=='link expired':
-         return '<h1>Link Expired</h1>'
+        return '<h1>Link Expired</h1>'
     else:
         if data.get('email','NA')=='NA':
             rid=data.get('rid')
@@ -2383,7 +2369,7 @@ def t_accept(rid):
 @app.route('/addondoubles/<rid>/<eid>/<game>',methods=['GET','POST'])
 def addondoubles(rid,eid,game):
     cursor = mydb.cursor(buffered=True)
-    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, member FROM register WHERE id=%s", [eid])
+    cursor.execute("SELECT ID, CONCAT(FirstName, ' ', LastName) AS FullName, Email, MobileNo, MCI_ID FROM register WHERE id=%s", [eid])
     data1 = cursor.fetchall()
     amount=1500
     cursor.close()
@@ -2659,56 +2645,12 @@ def gamesdata(id1):
 def cgames():
     if session.get('user'):
         cursor = mydb.cursor(buffered=True)
-        cursor.execute("SELECT game, COUNT(*) AS count, SUM(amount) AS total FROM game WHERE game  IN ('ATHLETICS', 'ARCHERY', 'BADMINTON', 'CARROMS', 'CHESS','CYCLOTHON', 'WALKATHON', 'SWIMMING', 'TENNIKOIT', 'THROW', 'ROWING', 'ROLLER SKATING', 'FENCING', 'SHOOTING', 'TABLE TENNIS', 'LAWN TENNIS') GROUP BY game")
-        individualdetails = cursor.fetchall()
-        cursor.execute("SELECT game, COUNT(*) AS count, SUM(amount) AS total FROM game WHERE game NOT IN ('ATHLETICS', 'ARCHERY', 'BADMINTON', 'CARROMS', 'CHESS','CYCLOTHON', 'WALKATHON', 'SWIMMING', 'TENNIKOIT', 'THROW', 'ROWING', 'ROLLER SKATING', 'FENCING', 'SHOOTING', 'TABLE TENNIS', 'LAWN TENNIS') GROUP BY game")
-        teamdetails = cursor.fetchall()
+        cursor.execute('select game, count(*) as count,sum(amount) as total from game group by game')
+        gamedetails = cursor.fetchall()
         cursor.close()
-        return render_template('pgames.html',teamdetails = teamdetails,individualdetails = individualdetails)
+        return render_template('pgames.html',gamedetails = gamedetails)
     else:
         return redirect(url_for('login'))
-
-@app.route('/ateams/<game>')
-def ateams(game):
-    if session.get('user'):
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute("SELECT r.ID, CONCAT(r.FirstName, ' ', r.LastName) AS FullName, s.team_number AS TeamID, s.game FROM register r INNER JOIN sub_games s ON r.ID = s.id WHERE s.game = %s", [game])
-        teamdetails = cursor.fetchall()
-        cursor.close()
-        return render_template('ateams.html',teamdetails = teamdetails)
-    else:
-        return redirect(url_for('login'))
-
-
-@app.route('/aindividual/<game>')
-def aindividual(game):
-    if session.get('user'):
-        if game in ('BADMINTON', 'CARROMS', 'TABLE TENNIS', 'LAWN TENNIS'):
-            cursor = mydb.cursor(buffered=True)
-            cursor.execute("SELECT t.team_number,t.id,CONCAT(r.FirstName, ' ', r.LastName) AS FullName,r.age,t.category,t.game,s.fullname,s.email,s.status FROM sub_games t LEFT JOIN individual_teams s on t.team_number=s.teamid INNER JOIN register r on r.ID=t.id having t.game=%s", [game])
-            teamdetails = cursor.fetchall()
-            print(teamdetails)
-            cursor.close()
-        else:
-            cursor = mydb.cursor(buffered=True)
-            cursor.execute("SELECT t.team_number,t.id,CONCAT(r.FirstName, ' ', r.LastName) AS FullName,t.game,t.category,s.fullname,s.email,s.status FROM sub_games t LEFT JOIN individual_teams s on t.team_number=s.teamid INNER JOIN register r on r.ID=t.id having t.game=%s", [game])
-            teamdetails = cursor.fetchall()
-            print(teamdetails)
-            cursor.close()
-        return render_template('aindividual.html',teamdetails = teamdetails)
-    else:
-        return redirect(url_for('login'))
-
-@app.route('/ateamdetails/<tid>')
-def ateamdetails(tid):
-    if session.get('user'):
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute("SELECT r.ID, CONCAT(r.FirstName, ' ', r.LastName) AS FullName,r.email, s.game FROM register r INNER JOIN sub_games s ON r.ID = s.id WHERE s.team_number = %s", [tid])
-        lead = cursor.fetchone()
-        cursor.execute("SELECT id,fullname,email,game,status FROM teams WHERE teamid=%s",[tid])
-        teamdetails = cursor.fetchall()
-        cursor.close()
-        return render_template('ateamdetails.html',lead = lead,teamdetails = teamdetails)       
 
 @app.route('/pgamedata/<game>')
 def pgamedata(game):
@@ -2720,6 +2662,7 @@ def pgamedata(game):
         return render_template('ppgames.html',pgames = pgames)
     else:
         return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.run()

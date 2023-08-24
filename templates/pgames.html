@@ -69,23 +69,22 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="payment-table">
-                    <h2>Individual Games</h2>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Game</th>
                                 <th>Total registations </th>
                                 <th>Total amount</th>
-                                <th>View player details</th>
+                                <th>View player setails</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in individualdetails %}
+                            {% for i in gamedetails %}
                             <tr>
                                 <td>{{ i[0] }}</td>
                                 <td>{{ i[1] }}</td>
                                 <td>{{ i[2] }}</td>
-                                <td><a href="{{url_for('aindividual',game=i[0])}}" class="btn btn-secondary">View</a></td>
+                                <td><a href="{{url_for('pgamedata',game=i[0])}}" class="btn btn-secondary">View</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -95,36 +94,5 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="payment-table">
-                    <h2>Team Games</h2>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Game</th>
-                                <th>Total registations </th>
-                                <th>Total amount</th>
-                                <th>View player details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in teamdetails %}
-                            <tr>
-                                <td>{{ i[0] }}</td>
-                                <td>{{ i[1] }}</td>
-                                <td>{{ i[2] }}</td>
-                                <td><a href="{{url_for('ateams',game=i[0])}}" class="btn btn-secondary">View</a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-    
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>

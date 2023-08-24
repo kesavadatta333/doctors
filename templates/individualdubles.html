@@ -93,12 +93,13 @@ input{
         <div class="col-12 col-md-6 col-lg-6">
           <h1>{{game}}</h1>
           <form method="POST">
-      
+            {% if game!='TENNIKOIT' %}
             <label for="checkbox0">  {{ "Men's" if gender=='Male' else "Women's" }} single</label>
             {% if c1 is defined %}
             <input type="checkbox" id="checkbox0" name="ch1" value="{{'Mens Single' if gender=='Male' else 'Womens Single'}}"  checked disabled><br>
             {% else %}
             <input type="checkbox" id="checkbox0" name="ch1" value="{{'Mens Single' if gender=='Male' else 'Womens Single'}}"><br>
+            {% endif %}
             {% endif %}
             {% if c2 is defined %}
             <label for="checkbox2"> {{ "Men's" if gender=='Male' else "Women's" }} Doubles</label>

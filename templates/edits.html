@@ -171,9 +171,9 @@
     <form method="POST">
 
         <label>First Name</label>
-        <input class="seth" type="text" name="fname" value="{{data[1]}}" required>
+        <input class="seth" type="text" name="fname" value="{{data[1]}}">
         <label>Last Name</label>
-        <input class="seth" type="text" name="lname" value="{{data[2]}}" required>
+        <input class="seth" type="text" name="lname" value="{{data[2]}}">
         <label>Email</label>
         <input class="seth" type="email" name="email" value="{{data[3]}}" readonly>
         <label>Mobile Number</label>
@@ -244,14 +244,10 @@
 
         </select>
         <label>State or MCI Registration No</label>
-        <input class="seth" type="text" name="mci" value="{{data[13]}}" required>
-        <label>Select Member</label>
-        <select class="seth" name="selectmember" aria-required="true" readonly>
-            <option>{{data[14]}}</option>
-
-        </select>
+        <input class="seth" type="text" name="mci" value="{{data[13]}}">
+       
         <label>Select Shirt Size</label>
-        <select class="seth" name="shirtsize" value="{{data[15]}}" required>
+        <select class="seth" name="shirtsize" value="{{data[14]}}">
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>
@@ -259,25 +255,13 @@
             <option value="XXL">XXL</option>
             <option value="XXXL">XXXL</option>
             <option value="XXXXL">XXXXL</option>
-            <option value="{{data[15]}}" selected>{{data[15]}}</option>
+            <option value="{{data[14]}}" selected>{{data[14]}}</option>
 
         </select>
         <label>Food Preference</label>
-        <select class="seth" name="food_preference" value="{{data[16]}}" required>
-            <option disabled>Select Preference</option>
-            <option selected>{{data[16]}}</option>
-            {% if data[16] == "Veg" %}
-            <option value="Non-Veg">Non-Veg</option>
-            {% else %}
-            <option value="Veg">Veg</option>
-            {% endif %}
+        <select class="seth" name="food_preference" value="{{data[15]}}">
+            <option selected>{{data[15]}}</option>
         </select>
-        {% if data[14] == "IMA Member" %}
-        <label>IMA Registration No:</label>
-        <input class="seth" id="ima_reg_no" type="text" name="ima_reg_no" value="{{data[17]}}" required>
-        {% else %}
-        <input class="seth" type="text" name="ima_reg_no" id="ima_reg_no" value="{{data[17]}}" hidden>
-        {% endif %}
         <!--<label>Upload IMA or MBBS certificate</label>
             <input type="file" name="certificate" data-maxsize="5" data-maxsize-message="This file exceeds the maximum allowed size.">
             <label>Upload Photo</label>
